@@ -359,13 +359,20 @@ export default function Landing() {
             />
 
             {/* Global AI Floating Action Button */}
-            <button
-                className="chatbot-fab"
-                onClick={() => setIsChatOpen(true)}
-                title="Open AI Assistant"
-            >
-                <MessageSquare size={24} />
-            </button>
+            <AnimatePresence>
+                {!isChatOpen && (
+                    <motion.button
+                        className="chatbot-fab"
+                        onClick={() => setIsChatOpen(true)}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0, opacity: 0 }}
+                        title="Open AI Assistant"
+                    >
+                        <MessageSquare size={24} />
+                    </motion.button>
+                )}
+            </AnimatePresence>
 
             <ChatBot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
         </div>
