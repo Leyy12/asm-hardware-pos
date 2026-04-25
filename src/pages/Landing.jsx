@@ -257,6 +257,68 @@ export default function Landing() {
                 </div>
             </section>
 
+            {/* Mobile Ready Section */}
+            <section className="mobile-ready-section" style={{ padding: '80px 20px', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+                <div style={{ maxWidth: 1000, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 60, flexWrap: 'wrap-reverse' }}>
+                    <div style={{ flex: 1, minWidth: 300 }}>
+                        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', fontWeight: 800, marginBottom: 20 }}>
+                            Experience ASM on the <span className="gradient-text">Go</span>
+                        </h2>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: 32 }}>
+                            Our system is a fully-featured Progressive Web App. Install it directly on your smartphone to get a native-app experience, faster load times, and offline capabilities.
+                        </p>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 40 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--success)' }}>
+                                    <CheckCircle2 size={16} />
+                                </div>
+                                <span style={{ fontWeight: 600 }}>One-tap Home Screen Access</span>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--success)' }}>
+                                    <CheckCircle2 size={16} />
+                                </div>
+                                <span style={{ fontWeight: 600 }}>Offline Resilience</span>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--success)' }}>
+                                    <CheckCircle2 size={16} />
+                                </div>
+                                <span style={{ fontWeight: 600 }}>Push Notifications Ready</span>
+                            </div>
+                        </div>
+
+                        <button 
+                            className="btn btn-primary" 
+                            style={{ padding: '16px 32px', fontSize: '1rem', gap: 12 }}
+                            onClick={() => {
+                                // Trigger the PWA install prompt
+                                window.dispatchEvent(new Event('triggerPwaInstall'));
+                            }}
+                        >
+                            <Smartphone size={20} /> Install Mobile App
+                        </button>
+                    </div>
+
+                    <div style={{ flex: 1, display: 'flex', justifyContent: 'center', position: 'relative' }}>
+                        <div style={{ width: 280, height: 500, background: '#000', borderRadius: 40, border: '8px solid #1e293b', position: 'relative', overflow: 'hidden', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
+                            <div style={{ width: 120, height: 25, background: '#000', position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', borderBottomLeftRadius: 15, borderBottomRightRadius: 15, zIndex: 10 }} />
+                            <div style={{ padding: 20, paddingTop: 40 }}>
+                                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'var(--accent)', marginBottom: 20 }} />
+                                <div className="skeleton" style={{ width: '80%', height: 20, marginBottom: 12 }} />
+                                <div className="skeleton" style={{ width: '60%', height: 15, marginBottom: 40 }} />
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                                    {[1, 2, 3, 4].map(i => (
+                                        <div key={i} className="skeleton" style={{ height: 80, borderRadius: 12 }} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Extended Footer */}
             <footer className="landing-footer">
                 <div className="footer-main">

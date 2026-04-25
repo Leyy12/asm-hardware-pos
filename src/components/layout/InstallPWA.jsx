@@ -1,43 +1,48 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Download, X } from 'lucide-react'
 
 export default function InstallPWA() {
-    const [deferredPrompt, setDeferredPrompt] = useState(null)
     const [showInstall, setShowInstall] = useState(false)
+    const promptRef = useRef(null)
 
     useEffect(() => {
         const handler = (e) => {
-            // Prevent Chrome 67 and earlier from automatically showing the prompt
             e.preventDefault()
-            // Stash the event so it can be triggered later
-            setDeferredPrompt(e)
-            // Show our custom UI
+            promptRef.current = e
             setShowInstall(true)
         }
 
         window.addEventListener('beforeinstallprompt', handler)
+        
+        const triggerHandler = () => {
+            if (promptRef.current) {
+                handleInstallClick()
+            } else {
+                alert('Install prompt not available. You can also install via your browser settings.')
+            }
+        }
+        window.addEventListener('triggerPwaInstall', triggerHandler)
 
-        // Check if already installed
         window.addEventListener('appinstalled', () => {
-            setDeferredPrompt(null)
+            promptRef.current = null
             setShowInstall(false)
         })
 
-        return () => window.removeEventListener('beforeinstallprompt', handler)
+        return () => {
+            window.removeEventListener('beforeinstallprompt', handler)
+            window.removeEventListener('triggerPwaInstall', triggerHandler)
+        }
     }, [])
 
     const handleInstallClick = async () => {
-        if (!deferredPrompt) return
-        // Show the prompt
-        deferredPrompt.prompt()
-        // Wait for the user to respond to the prompt
-        const { outcome } = await deferredPrompt.userChoice
+        if (!promptRef.current) return
+        promptRef.current.prompt()
+        const { outcome } = await promptRef.current.userChoice
         if (outcome === 'accepted') {
             setShowInstall(false)
         }
-        // We no longer need the prompt. Clear it up.
-        setDeferredPrompt(null)
+        promptRef.current = null
     }
 
     return (
