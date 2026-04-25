@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Package, Smartphone, Database, Bot, CheckCircle2, ShieldCheck, Zap, UserPlus, MessageSquare } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
