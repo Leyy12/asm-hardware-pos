@@ -4,9 +4,14 @@ import { Download, X } from 'lucide-react'
 
 export default function InstallPWA() {
     const [showInstall, setShowInstall] = useState(false)
+    const [isIOS, setIsIOS] = useState(false)
     const promptRef = useRef(null)
 
     useEffect(() => {
+        // Detect iOS
+        const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+        setIsIOS(ios)
+
         const handler = (e) => {
             e.preventDefault()
             promptRef.current = e
@@ -18,8 +23,10 @@ export default function InstallPWA() {
         const triggerHandler = () => {
             if (promptRef.current) {
                 handleInstallClick()
+            } else if (ios) {
+                alert('On iPhone/iPad: Tap the "Share" icon (square with arrow) at the bottom, then scroll down and tap "Add to Home Screen".')
             } else {
-                alert('Install prompt not available. You can also install via your browser settings.')
+                alert('To install: Open your browser menu (⋮) and tap "Install App" or "Add to Home Screen".')
             }
         }
         window.addEventListener('triggerPwaInstall', triggerHandler)
@@ -27,7 +34,13 @@ export default function InstallPWA() {
         window.addEventListener('appinstalled', () => {
             promptRef.current = null
             setShowInstall(false)
+            alert('ASM System installed successfully! You can now open it from your home screen.')
         })
+
+        // If it's iOS, we can show a special tip after a few seconds
+        if (ios && !window.navigator.standalone) {
+            setTimeout(() => setShowInstall(true), 3000)
+        }
 
         return () => {
             window.removeEventListener('beforeinstallprompt', handler)
@@ -55,54 +68,57 @@ export default function InstallPWA() {
                     style={{
                         position: 'fixed',
                         bottom: 24,
-                        right: 24,
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: 'calc(100% - 48px)',
                         background: 'var(--bg-elevated)',
                         padding: '16px 20px',
                         borderRadius: 16,
-                        boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+                        boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
                         border: '1px solid var(--border)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 20,
+                        gap: 16,
                         zIndex: 9999,
-                        maxWidth: 380
+                        maxWidth: 420
                     }}
                 >
                     <div style={{
                         width: 44, height: 44, borderRadius: 12,
-                        background: 'var(--bg-sidebar)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        background: 'var(--accent)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        flexShrink: 0
                     }}>
-                        <Download size={22} style={{ color: 'var(--text-primary)' }} />
+                        <Download size={22} color="#000" />
                     </div>
                     <div style={{ flex: 1 }}>
-                        <p style={{ fontWeight: 700, margin: '0 0 4px', fontSize: '0.95rem' }}>Install App</p>
+                        <p style={{ fontWeight: 800, margin: '0 0 2px', fontSize: '1rem' }}>
+                            {isIOS ? 'Add to Home Screen' : 'Install ASM System'}
+                        </p>
                         <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.3 }}>
-                            Install the ASM System for a faster, app-like experience with offline support!
+                            {isIOS 
+                                ? 'Tap Share and then "Add to Home Screen" for the full app experience.' 
+                                : 'Faster, offline-ready, and works like a real app!'}
                         </p>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        <button
-                            className="btn btn-primary btn-sm"
-                            style={{ padding: '6px 12px', fontSize: '0.75rem' }}
-                            onClick={handleInstallClick}
-                        >
-                            Install
-                        </button>
+                        {!isIOS && (
+                            <button
+                                className="btn btn-primary btn-sm"
+                                style={{ padding: '8px 16px', fontSize: '0.8rem', fontWeight: 700 }}
+                                onClick={handleInstallClick}
+                            >
+                                Install
+                            </button>
+                        )}
                         <button
                             className="btn btn-secondary btn-sm"
-                            style={{ padding: '6px 12px', fontSize: '0.75rem', background: 'transparent', border: 'none' }}
+                            style={{ padding: '8px 16px', fontSize: '0.8rem', background: 'transparent', border: 'none' }}
                             onClick={() => setShowInstall(false)}
                         >
-                            Not Now
+                            {isIOS ? 'Got it' : 'Later'}
                         </button>
                     </div>
-                    <button
-                        onClick={() => setShowInstall(false)}
-                        style={{ position: 'absolute', top: 8, right: 8, background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}
-                    >
-                        <X size={14} />
-                    </button>
                 </motion.div>
             )}
         </AnimatePresence>
