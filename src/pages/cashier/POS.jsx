@@ -8,7 +8,7 @@ import { db, auth } from '../../firebase'
 import { formatCurrency, generateTransactionId } from '../../utils/helpers'
 import {
     Search, Trash2, ShoppingCart, Camera, Keyboard,
-    RotateCcw, Calendar, Receipt, Package, Printer, Check
+    RotateCcw, Calendar, Receipt, Package, Printer, Check, History, X
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
@@ -31,6 +31,8 @@ export default function POS() {
     const [todaySales, setTodaySales] = useState(0)
     const [todayTransactions, setTodayTransactions] = useState(0)
     const [todayItems, setTodayItems] = useState(0)
+    const [recentSalesList, setRecentSalesList] = useState([])
+    const [showRecentModal, setShowRecentModal] = useState(false)
     const skuRef = useRef(null)
     const { userProfile } = useAuth()
     const navigate = useNavigate()
@@ -65,6 +67,7 @@ export default function POS() {
                 setTodayItems(todayDocs.reduce((s, d) => {
                     return s + (d.data().items?.reduce((a, i) => a + (i.qty || 0), 0) || 0)
                 }, 0))
+                setRecentSalesList(todayDocs.sort((a, b) => (b.data().createdAt?.toDate() || 0) - (a.data().createdAt?.toDate() || 0)))
             }
         )
         return unsub
@@ -343,11 +346,15 @@ export default function POS() {
                 </div>
             </div>
 
-            {/* ---- Refund Button ---- */}
-            <div style={{ marginBottom: 20 }}>
+            {/* ---- Action Buttons ---- */}
+            <div style={{ marginBottom: 20, display: 'flex', gap: 12 }}>
                 <button className="btn btn-secondary" onClick={() => navigate('/cashier/refund')}
                     style={{ gap: 8, borderRadius: 12, border: '2px solid var(--text-primary)', fontWeight: 700 }}>
                     <RotateCcw size={16} /> Request Refund
+                </button>
+                <button className="btn btn-secondary" onClick={() => setShowRecentModal(true)}
+                    style={{ gap: 8, borderRadius: 12, border: '2px solid var(--border)', fontWeight: 700 }}>
+                    <History size={16} /> Recent Transactions
                 </button>
             </div>
 
@@ -564,6 +571,64 @@ export default function POS() {
                     )}
                 </div>
             </div>
+
+            {/* Recent Transactions Modal */}
+            <AnimatePresence>
+                {showRecentModal && (
+                    <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <motion.div className="modal" style={{ maxWidth: 600, width: '95%' }}
+                            initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}>
+                            <div className="modal-header">
+                                <span className="modal-title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}><History size={20} /> Today's Transactions</span>
+                                <button className="chat-icon-btn" onClick={() => setShowRecentModal(false)}><X size={18} /></button>
+                            </div>
+                            <div className="modal-body" style={{ maxHeight: '60vh', overflowY: 'auto', padding: 0 }}>
+                                {recentSalesList.length === 0 ? (
+                                    <div style={{ padding: 40, textAlign: 'center', color: 'var(--text-muted)' }}>No transactions today yet.</div>
+                                ) : (
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        {recentSalesList.map(sale => {
+                                            const data = sale.data()
+                                            const ts = data.createdAt?.toDate?.()
+                                            return (
+                                                <div key={sale.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: '1px solid var(--border)' }}>
+                                                    <div>
+                                                        <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>TXN: {data.transactionId}</div>
+                                                        <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{ts ? ts.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Unknown time'} • {data.items?.length || 0} items</div>
+                                                    </div>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                                                        <div style={{ fontWeight: 800, color: 'var(--accent)', fontSize: '1.05rem' }}>{formatCurrency(data.total)}</div>
+                                                        <button 
+                                                            className="btn btn-secondary btn-sm"
+                                                            onClick={() => {
+                                                                setReceipt({
+                                                                    transactionId: data.transactionId,
+                                                                    items: data.items || [],
+                                                                    subtotal: data.subtotal,
+                                                                    discountAmt: data.discount || 0,
+                                                                    discountPct: data.discount ? (data.discount / data.subtotal) : 0,
+                                                                    total: data.total,
+                                                                    tendered: data.tendered,
+                                                                    change: data.change,
+                                                                    cashierName: data.cashierName,
+                                                                    date: ts || new Date()
+                                                                })
+                                                                setShowRecentModal(false)
+                                                            }}
+                                                        >
+                                                            View Receipt
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

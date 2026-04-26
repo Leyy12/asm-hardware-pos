@@ -362,7 +362,7 @@
 
 /* Left - Input Panel */
 .pos-v2-left {
-    background: white;
+    background: var(--bg-surface);
     border-radius: 16px;
     padding: 20px;
     display: flex;
@@ -446,7 +446,7 @@
     padding: 12px 16px;
     border: 2px solid var(--bg-sidebar);
     border-radius: 12px;
-    background: white;
+    background: var(--bg-elevated);
 }
 
 .pos-cart-item-info {
@@ -510,7 +510,7 @@
     border-radius: 8px;
     font-size: 0.875rem;
     font-weight: 700;
-    background: white;
+    background: var(--bg-base);
     color: var(--text-primary);
     outline: none;
 }
@@ -526,7 +526,7 @@
 
 /* Right - Summary Panel */
 .pos-v2-right {
-    background: white;
+    background: var(--bg-surface);
     border-radius: 16px;
     padding: 20px 22px;
     display: flex;

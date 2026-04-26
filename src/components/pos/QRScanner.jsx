@@ -13,6 +13,7 @@ export default function QRScanner({ onScan, onError, active }) {
     const containerId = 'qr-scanner-container'
 
     const startScanner = useCallback(async () => {
+        if (scannerRef.current) return // Prevent multiple instances
         try {
             const scanner = new Html5Qrcode(containerId)
             scannerRef.current = scanner
@@ -38,7 +39,14 @@ export default function QRScanner({ onScan, onError, active }) {
                 scannerRef.current.clear()
                 scannerRef.current = null
             }
-        } catch (_) { /* ignore */ }
+        } catch (_) { 
+            // ignore 
+        } finally {
+            // Force DOM cleanup to remove orphaned video tags
+            const el = document.getElementById(containerId)
+            if (el) el.innerHTML = ''
+            scannerRef.current = null
+        }
     }, [])
 
     useEffect(() => {
