@@ -245,58 +245,75 @@ export default function POS() {
             <div className="pos-receipt-root">
                 <div className="pos-receipt-card" id="printable-receipt">
                     <div className="receipt-store-header">
-                        <Package size={32} style={{ color: '#10B981' }} />
-                        <h2>ASM Hardware</h2>
-                        <p>& General Merchandise</p>
-                        <p style={{ fontSize: '0.7rem', color: '#666', marginTop: 4 }}>Official Receipt</p>
+                        <Package size={28} style={{ marginBottom: 6, opacity: 0.8 }} />
+                        <h2 style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}>ASM HARDWARE</h2>
+                        <p style={{ letterSpacing: '0.05em' }}>& GENERAL MERCHANDISE</p>
+                        <p style={{ fontSize: '0.65rem', marginTop: 6, fontWeight: 600 }}>OFFICIAL RECEIPT</p>
                     </div>
-                    <div className="receipt-divider" />
+                    <div className="receipt-divider dashed" />
                     <div className="receipt-meta">
-                        <span>TXN: <strong style={{ fontFamily: 'monospace' }}>{receipt.transactionId}</strong></span>
+                        <span>TXN: {receipt.transactionId}</span>
                         <span>{receipt.date.toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
-                        <span>Cashier: {receipt.cashierName}</span>
                     </div>
-                    <div className="receipt-divider" />
+                    <div className="receipt-divider dashed" />
+                    
+                    <div className="receipt-items-header">
+                        <span>ITEM</span>
+                        <span>QTY</span>
+                        <span>AMT</span>
+                    </div>
+
                     <div className="receipt-items">
                         {receipt.items.map((item, i) => (
                             <div key={i} className="receipt-item-row">
-                                <div>
+                                <div className="receipt-item-details">
                                     <span className="receipt-item-name">{item.name}</span>
-                                    <span className="receipt-item-sub">x{item.qty} @ {formatCurrency(item.price)}</span>
+                                    <span className="receipt-item-price-calc">{item.qty} x {item.price.toFixed(2)}</span>
                                 </div>
-                                <span className="receipt-item-total">{formatCurrency(item.subtotal)}</span>
+                                <span className="receipt-item-total">{item.subtotal.toFixed(2)}</span>
                             </div>
                         ))}
                     </div>
-                    <div className="receipt-divider" />
+                    <div className="receipt-divider dashed" />
+                    
                     <div className="receipt-totals">
                         <div className="receipt-total-row">
-                            <span>Subtotal</span>
-                            <span>{formatCurrency(receipt.subtotal)}</span>
+                            <span>SUBTOTAL</span>
+                            <span>{receipt.subtotal.toFixed(2)}</span>
                         </div>
                         {receipt.discountAmt > 0 && (
-                            <div className="receipt-total-row" style={{ color: '#388E3C' }}>
-                                <span>Discount (10%)</span>
-                                <span>-{formatCurrency(receipt.discountAmt)}</span>
+                            <div className="receipt-total-row">
+                                <span>DISCOUNT</span>
+                                <span>-{receipt.discountAmt.toFixed(2)}</span>
                             </div>
                         )}
-                        <div className="receipt-total-row receipt-grand-total">
+                        <div className="receipt-grand-total-block">
                             <span>TOTAL</span>
-                            <span>{formatCurrency(receipt.total)}</span>
+                            <span>₱{receipt.total.toFixed(2)}</span>
                         </div>
                         <div className="receipt-total-row">
-                            <span>Cash Tendered</span>
-                            <span>{formatCurrency(receipt.tendered)}</span>
+                            <span>CASH TENDERED</span>
+                            <span>{receipt.tendered.toFixed(2)}</span>
                         </div>
-                        <div className="receipt-total-row" style={{ color: '#388E3C', fontWeight: 700 }}>
-                            <span>Change</span>
-                            <span>{formatCurrency(receipt.change)}</span>
+                        <div className="receipt-total-row">
+                            <span>CHANGE</span>
+                            <span>{receipt.change.toFixed(2)}</span>
                         </div>
                     </div>
-                    <div className="receipt-divider" />
+                    
+                    <div className="receipt-divider dashed" />
+                    
                     <div className="receipt-footer">
-                        <p>Thank you for shopping!</p>
-                        <p style={{ fontSize: '0.7rem', color: '#999' }}>This receipt is your proof of purchase.</p>
+                        <p>SERVED BY: {receipt.cashierName.toUpperCase()}</p>
+                        
+                        {/* Decorative Barcode */}
+                        <div className="receipt-barcode">
+                            || ||| | ||| || || | ||| ||| |
+                            <span className="receipt-barcode-text">{receipt.transactionId}</span>
+                        </div>
+                        
+                        <p style={{ marginTop: 16 }}>THANK YOU FOR SHOPPING!</p>
+                        <p style={{ fontSize: '0.65rem' }}>THIS RECEIPT IS YOUR PROOF OF PURCHASE.</p>
                     </div>
                 </div>
                 <div className="pos-receipt-actions no-print">
