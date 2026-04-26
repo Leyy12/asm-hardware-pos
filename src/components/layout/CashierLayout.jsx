@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     ShoppingCart, RotateCcw, LogOut, ChevronLeft,
-    ChevronRight, Package, MessageSquareText, Bell
+    ChevronRight, Package, MessageSquareText, Bell, Menu, X
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import ChatBot from '../chatbot/ChatBot'
@@ -16,21 +16,61 @@ const navItems = [
 
 export default function CashierLayout({ children }) {
     const [collapsed, setCollapsed] = useState(false)
+    const [mobileOpen, setMobileOpen] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
     const [chatOpen, setChatOpen] = useState(false)
     const { userProfile, logout } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+
+    // Detect mobile viewport
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth <= 768)
+        check()
+        window.addEventListener('resize', check)
+        return () => window.removeEventListener('resize', check)
+    }, [])
+
+    // Close drawer on route change (mobile)
+    useEffect(() => {
+        if (isMobile) setMobileOpen(false)
+    }, [location.pathname, isMobile])
+
+    // Prevent body scroll when drawer is open on mobile
+    useEffect(() => {
+        if (isMobile && mobileOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = ''
+        }
+        return () => { document.body.style.overflow = '' }
+    }, [isMobile, mobileOpen])
 
     const handleLogout = async () => {
         await logout()
         navigate('/login')
     }
 
+    const showLabels = isMobile ? true : !collapsed
+
     return (
         <div className="layout-root">
+            {/* ---- Mobile Overlay ---- */}
+            {isMobile && (
+                <div
+                    className={`sidebar-overlay ${mobileOpen ? 'open' : ''}`}
+                    onClick={() => setMobileOpen(false)}
+                />
+            )}
+
             {/* ---- Sidebar ---- */}
             <motion.aside
-                className="sidebar"
-                animate={{ width: collapsed ? 'var(--sidebar-collapsed)' : 'var(--sidebar-w)' }}
+                className={`sidebar ${isMobile && mobileOpen ? 'mobile-open' : ''}`}
+                animate={
+                    isMobile
+                        ? {} // CSS handles transform on mobile
+                        : { width: collapsed ? 'var(--sidebar-collapsed)' : 'var(--sidebar-w)' }
+                }
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
             >
                 {/* Logo */}
@@ -39,7 +79,7 @@ export default function CashierLayout({ children }) {
                         <Package size={20} />
                     </div>
                     <AnimatePresence>
-                        {!collapsed && (
+                        {showLabels && (
                             <motion.div
                                 className="logo-text"
                                 initial={{ opacity: 0, width: 0 }}
@@ -52,13 +92,27 @@ export default function CashierLayout({ children }) {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    <button
-                        className="collapse-btn"
-                        onClick={() => setCollapsed(!collapsed)}
-                        title={collapsed ? 'Expand' : 'Collapse'}
-                    >
-                        {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-                    </button>
+                    {/* Desktop collapse btn */}
+                    {!isMobile && (
+                        <button
+                            className="collapse-btn"
+                            onClick={() => setCollapsed(!collapsed)}
+                            title={collapsed ? 'Expand' : 'Collapse'}
+                        >
+                            {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+                        </button>
+                    )}
+                    {/* Mobile close btn */}
+                    {isMobile && (
+                        <button
+                            className="collapse-btn"
+                            onClick={() => setMobileOpen(false)}
+                            title="Close menu"
+                            style={{ display: 'flex' }}
+                        >
+                            <X size={16} />
+                        </button>
+                    )}
                 </div>
 
                 {/* Nav */}
@@ -72,7 +126,7 @@ export default function CashierLayout({ children }) {
                         >
                             <Icon size={20} className="nav-icon" />
                             <AnimatePresence>
-                                {!collapsed && (
+                                {showLabels && (
                                     <motion.span
                                         className="nav-label"
                                         initial={{ opacity: 0, width: 0 }}
@@ -97,7 +151,7 @@ export default function CashierLayout({ children }) {
                 >
                     <MessageSquareText size={20} className="nav-icon" />
                     <AnimatePresence>
-                        {!collapsed && (
+                        {showLabels && (
                             <motion.span className="nav-label"
                                 initial={{ opacity: 0, width: 0 }}
                                 animate={{ opacity: 1, width: 'auto' }}
@@ -116,7 +170,7 @@ export default function CashierLayout({ children }) {
                         {userProfile?.name?.charAt(0) || 'C'}
                     </div>
                     <AnimatePresence>
-                        {!collapsed && (
+                        {showLabels && (
                             <motion.div
                                 className="user-info"
                                 initial={{ opacity: 0, width: 0 }}
@@ -140,6 +194,14 @@ export default function CashierLayout({ children }) {
                 {/* Top bar */}
                 <header className="topbar">
                     <div className="topbar-left">
+                        {/* Hamburger (mobile only) */}
+                        <button
+                            className="topbar-hamburger"
+                            onClick={() => setMobileOpen(true)}
+                            title="Open menu"
+                        >
+                            <Menu size={20} />
+                        </button>
                         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Terminal Active</h2>
                     </div>
                     <div className="topbar-right">
@@ -155,7 +217,7 @@ export default function CashierLayout({ children }) {
                 {/* Content */}
                 <main className="content" style={{ padding: '24px' }}>
                     <motion.div
-                        key={window.location.pathname}
+                        key={location.pathname}
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
@@ -170,4 +232,3 @@ export default function CashierLayout({ children }) {
         </div>
     )
 }
-
