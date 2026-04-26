@@ -14,6 +14,7 @@ import {
     LineChart, Line, XAxis, YAxis, CartesianGrid,
     Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, BarChart, Bar
 } from 'recharts'
+import { useNavigate } from 'react-router-dom'
 
 const COLORS = ['#10B981', '#388E3C', '#1976D2', '#D32F2F', '#09bccd', '#f59e0b']
 
@@ -23,6 +24,7 @@ const cardVariants = {
 }
 
 export default function Dashboard() {
+    const navigate = useNavigate()
     const [stats, setStats] = useState({ todaySales: 0, totalProducts: 0, lowStock: 0, activeCashiers: 0 })
     const [recentSales, setRecentSales] = useState([])
     const [salesTrend, setSalesTrend] = useState([])
@@ -212,7 +214,12 @@ export default function Dashboard() {
                                         </span>
                                     </td>
                                     <td style={{ padding: '14px 20px' }}>
-                                        <button style={{ background: 'var(--accent)', color: 'var(--bg-base)', padding: '8px 16px', borderRadius: 8, border: 'none', fontWeight: 800, cursor: 'pointer', fontSize: '0.8rem', transition: 'transform 0.2s' }} onMouseEnter={e => e.target.style.transform = 'scale(1.05)'} onMouseLeave={e => e.target.style.transform = 'scale(1)'}>
+                                        <button 
+                                            onClick={() => navigate('/admin/inventory')}
+                                            style={{ background: 'var(--accent)', color: 'var(--bg-base)', padding: '8px 16px', borderRadius: 8, border: 'none', fontWeight: 800, cursor: 'pointer', fontSize: '0.8rem', transition: 'transform 0.2s' }} 
+                                            onMouseEnter={e => e.target.style.transform = 'scale(1.05)'} 
+                                            onMouseLeave={e => e.target.style.transform = 'scale(1)'}
+                                        >
                                             + Add Stock
                                         </button>
                                     </td>
