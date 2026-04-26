@@ -4,8 +4,7 @@ import {
     collection, onSnapshot, addDoc, updateDoc, deleteDoc,
     doc, serverTimestamp, getDocs
 } from 'firebase/firestore'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { db, storage } from '../../firebase'
+import { db } from '../../firebase'
 import { formatCurrency, getStockStatus, exportToCSV } from '../../utils/helpers'
 import { Plus, Search, Edit2, Trash2, Download, X, Upload, Package, QrCode } from 'lucide-react'
 import { QRCodeSVG, QRCodeCanvas } from 'qrcode.react'
@@ -24,8 +23,6 @@ export default function Inventory() {
     const [modalOpen, setModalOpen] = useState(false)
     const [editing, setEditing] = useState(null)
     const [form, setForm] = useState(emptyProduct)
-    const [imgFile, setImgFile] = useState(null)
-    const [imgPreview, setImgPreview] = useState('')
     const [saving, setSaving] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
     const [qrProduct, setQrProduct] = useState(null)
@@ -50,24 +47,13 @@ export default function Inventory() {
     const openAdd = () => {
         setEditing(null)
         setForm(emptyProduct)
-        setImgFile(null)
-        setImgPreview('')
         setModalOpen(true)
     }
 
     const openEdit = (p) => {
         setEditing(p)
         setForm({ ...p })
-        setImgPreview(p.imageUrl || '')
-        setImgFile(null)
         setModalOpen(true)
-    }
-
-    const handleImgChange = (e) => {
-        const file = e.target.files[0]
-        if (!file) return
-        setImgFile(file)
-        setImgPreview(URL.createObjectURL(file))
     }
 
     const handleSave = async () => {
@@ -76,12 +62,7 @@ export default function Inventory() {
         }
         setSaving(true)
         try {
-            let imageUrl = form.imageUrl || ''
-            if (imgFile) {
-                const storageRef = ref(storage, `products/${Date.now()}_${imgFile.name}`)
-                await uploadBytes(storageRef, imgFile)
-                imageUrl = await getDownloadURL(storageRef)
-            }
+            const imageUrl = form.imageUrl || ''
 
             const data = {
                 ...form,
@@ -227,17 +208,6 @@ export default function Inventory() {
                                 <button className="chat-icon-btn" onClick={() => setModalOpen(false)}><X size={18} /></button>
                             </div>
                             <div className="modal-body" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                                {/* Image upload */}
-                                <div style={{ gridColumn: '1/-1', display: 'flex', alignItems: 'center', gap: 16 }}>
-                                    <div style={{ width: 80, height: 80, borderRadius: 12, overflow: 'hidden', background: 'var(--bg-elevated)', border: '1px dashed var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                        {imgPreview ? <img src={imgPreview} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="preview" />
-                                            : <Package size={24} style={{ color: 'var(--text-muted)' }} />}
-                                    </div>
-                                    <label className="btn btn-secondary btn-sm" style={{ cursor: 'pointer' }}>
-                                        <Upload size={14} /> Upload Image
-                                        <input type="file" accept="image/*" onChange={handleImgChange} style={{ display: 'none' }} />
-                                    </label>
-                                </div>
 
                                 <div className="form-group">
                                     <label className="form-label">Product Name *</label>
