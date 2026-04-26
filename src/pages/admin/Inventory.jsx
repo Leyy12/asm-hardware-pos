@@ -165,10 +165,6 @@ export default function Inventory() {
                                 <tr key={p.id}>
                                     <td>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                            {p.imageUrl
-                                                ? <img src={p.imageUrl} alt={p.name} style={{ width: 36, height: 36, borderRadius: 8, objectFit: 'cover' }} />
-                                                : <div style={{ width: 36, height: 36, borderRadius: 8, background: 'var(--bg-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Package size={16} style={{ color: 'var(--text-muted)' }} /></div>
-                                            }
                                             <span style={{ fontWeight: 600 }}>{p.name}</span>
                                         </div>
                                     </td>
