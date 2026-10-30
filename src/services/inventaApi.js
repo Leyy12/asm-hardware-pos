@@ -10,18 +10,24 @@
 const BASE = '/api/inventa'
 
 /**
- * Fetch all products from the InventaAPI DaaS catalog
- * via the secure ASM backend proxy.
+ * Fetch products from the InventaAPI DaaS catalog via the secure ASM backend.
+ * The backend calls InventaAPI once per segment key (Hardware, Grocery,
+ * Pharmacy) and tags each product with `inventaSegment`.
  *
- * @returns {Promise<{ ok: boolean, data: any[], error: string|null }>}
+ * `segments` lists each key's result, e.g.
+ *   [{ segment: 'Hardware', ok: true, count: 2 },
+ *    { segment: 'Grocery', ok: false, error: '...' }]
+ *
+ * @returns {Promise<{ ok: boolean, data: any[], segments: any[], error: string|null }>}
  */
 export async function fetchInventaProducts() {
   try {
     const res = await fetch(`${BASE}/products`)
     const body = await res.json()
+    const segments = Array.isArray(body.segments) ? body.segments : []
 
     if (!res.ok) {
-      return { ok: false, data: [], error: body.error || `Server returned ${res.status}` }
+      return { ok: false, data: [], segments, error: body.error || `Server returned ${res.status}` }
     }
 
     // InventaAPI may return an array directly or { products: [...] }
@@ -30,9 +36,9 @@ export async function fetchInventaProducts() {
       ? body
       : (body.products ?? body.catalog ?? body.data ?? body.items ?? [])
 
-    return { ok: true, data: products, error: null }
+    return { ok: true, data: products, segments, error: null }
   } catch (err) {
-    return { ok: false, data: [], error: 'Unable to reach ASM backend. Is it running on port 3002?' }
+    return { ok: false, data: [], segments: [], error: 'Unable to reach ASM backend. Is it running on port 3002?' }
   }
 }
 
