@@ -3,7 +3,8 @@
  *
  * SECURITY: This file knows NOTHING about the INVENTA_API_KEY.
  * All calls go to /api/inventa/products (ASM backend).
- * The Vite dev proxy forwards /api/* → http://localhost:3002.
+ * Locally, `npm run dev` answers this route (see vite.config.js); on Vercel it is
+ * api/inventa/products.js. Both read the keys from environment variables.
  * The backend then securely calls InventaAPI with the secret key.
  */
 
@@ -37,8 +38,8 @@ export async function fetchInventaProducts() {
       : (body.products ?? body.catalog ?? body.data ?? body.items ?? [])
 
     return { ok: true, data: products, segments, error: null }
-  } catch (err) {
-    return { ok: false, data: [], segments: [], error: 'Unable to reach ASM backend. Is it running on port 3002?' }
+  } catch {
+    return { ok: false, data: [], segments: [], error: 'Unable to reach the ASM server. Is `npm run dev` running?' }
   }
 }
 
