@@ -1,9 +1,13 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
+import { fileURLToPath } from 'node:url'
+
+// Always read server/.env, whichever folder the server is started from.
+dotenv.config({ path: fileURLToPath(new URL('./.env', import.meta.url)) })
 import express from 'express'
 import cors from 'cors'
 
 const app = express()
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3002  // vite.config.js proxies /api to 3002
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
 // Only allow requests from the Vite dev server.
