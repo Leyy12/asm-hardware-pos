@@ -1,6 +1,6 @@
 node_modules
 dist
-# Settings with real keys — NEVER commit (copy .env.example to .env instead)
+# Settings with real keys — NEVER commit (see README.md for what goes in .env)
 .env
 .env.local
 .env.*.local
