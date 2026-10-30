@@ -15,6 +15,15 @@ function renderValue(val) {
   return String(val)
 }
 
+// ─── Variants: InventaAPI lists each product once with its variants inside ───
+function variantList(product) {
+  const list = product.variants || product.variantList
+  return Array.isArray(list) ? list.filter(v => v && typeof v === 'object') : []
+}
+function variantLabel(v) {
+  return [v.size, v.flavor].filter(Boolean).join(' · ') || v.sku || 'Variant'
+}
+
 // ─── Expandable detail drawer for a single product ───────────────────────────
 function ProductDetail({ product, onClose }) {
   return (
@@ -61,10 +70,37 @@ function ProductDetail({ product, onClose }) {
           </button>
         </div>
 
-        {/* All fields as a table */}
+        {/* Variants */}
+        {variantList(product).length > 0 && (
+          <div style={{ marginBottom: 20 }}>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Layers size={12} /> Variants ({variantList(product).length})
+            </div>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.83rem' }}>
+              <thead>
+                <tr style={{ borderBottom: '1px solid var(--border)', color: 'var(--text-muted)', textAlign: 'left' }}>
+                  <th style={{ padding: '6px 8px 6px 0', fontWeight: 600 }}>Size</th>
+                  <th style={{ padding: '6px 8px', fontWeight: 600 }}>Type / Flavor</th>
+                  <th style={{ padding: '6px 0 6px 8px', fontWeight: 600 }}>SKU</th>
+                </tr>
+              </thead>
+              <tbody>
+                {variantList(product).map((v, i) => (
+                  <tr key={v.sku || i} style={{ borderBottom: '1px solid var(--border-light)', color: 'var(--text-primary)' }}>
+                    <td style={{ padding: '6px 8px 6px 0' }}>{renderValue(v.size)}</td>
+                    <td style={{ padding: '6px 8px' }}>{renderValue(v.flavor)}</td>
+                    <td style={{ padding: '6px 0 6px 8px', fontFamily: 'monospace', fontSize: '0.78rem' }}>{renderValue(v.sku)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* All other fields as a table */}
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <tbody>
-            {Object.entries(product).map(([key, val]) => (
+            {Object.entries(product).filter(([key]) => key !== 'variants' && key !== 'variantList').map(([key, val]) => (
               <tr key={key} style={{ borderBottom: '1px solid var(--border-light)' }}>
                 <td style={{ padding: '8px 12px 8px 0', fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, whiteSpace: 'nowrap', verticalAlign: 'top', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   {key}
@@ -94,7 +130,8 @@ function ProductCard({ product, index, onDetail }) {
                  : product.quantity !== undefined ? product.quantity
                  : product.inventory !== undefined ? product.inventory
                  : null
-  const variants = product.variants || product.variantList || null
+  const variants = variantList(product)
+  const segment  = product.inventaSegment || product.segment || null
 
   return (
     <motion.div
@@ -174,12 +211,31 @@ function ProductCard({ product, index, onDetail }) {
             ₱{Number(price).toLocaleString()}
           </span>
         )}
-        {variants && Array.isArray(variants) && variants.length > 0 && (
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 6, padding: '2px 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
-            <Layers size={11} /> {variants.length} variant{variants.length !== 1 ? 's' : ''}
+        {segment && (
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 6, padding: '2px 8px' }}>
+            {segment}
           </span>
         )}
       </div>
+
+      {/* Variants */}
+      {variants.length > 0 && (
+        <div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
+            <Layers size={11} /> {variants.length} variant{variants.length !== 1 ? 's' : ''}
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {variants.slice(0, 8).map((v, i) => (
+              <span key={v.sku || i} title={v.sku || ''} style={{ fontSize: '0.75rem', color: 'var(--text-primary)', background: 'var(--accent-glow)', borderRadius: 6, padding: '2px 8px' }}>
+                {variantLabel(v)}
+              </span>
+            ))}
+            {variants.length > 8 && (
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', padding: '2px 4px' }}>+{variants.length - 8} more</span>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Detail hint */}
       <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4, marginTop: 'auto', paddingTop: 6, borderTop: '1px solid var(--border-light)' }}>
