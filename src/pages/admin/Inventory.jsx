@@ -22,6 +22,25 @@ const emptyProduct = {
 
 const PAGE_SIZE = 10
 
+// InventaAPI returns each product once, with the variants the customer chose in
+// `variants` (e.g. Adjustable Wrench: 8, 10 and 12 inch). Show one row per variant.
+function expandInventaVariants(p) {
+    const variants = Array.isArray(p.variants) ? p.variants.filter(v => v && typeof v === 'object') : []
+    if (variants.length === 0) return [p]
+    return variants.map((v, i) => ({
+        ...p,
+        id: variants.length > 1 ? `${p.id}__${v.sku || i}` : p.id,
+        inventaProductId: p.id,
+        name: v.flavor ? `${p.name} (${v.flavor})` : p.name,
+        sku: v.sku || p.sku,
+        size: v.size || p.size,
+        flavor: v.flavor || null,
+        image_url: v.image_url || p.image_url,
+        expirationDate: v.expirationDate || p.expirationDate,
+        stock: v.stock !== undefined ? v.stock : p.stock,
+    }))
+}
+
 export default function Inventory() {
     const { settings } = useAuth()
     const defaultThreshold = settings?.lowStockAlert ?? 5
@@ -320,9 +339,10 @@ export default function Inventory() {
     const loadedSegments = inventaSegments.filter(s => s.ok)
     const failedSegments = inventaSegments.filter(s => !s.ok)
     const activeSegment = loadedSegments.some(s => s.segment === segmentFilter) ? segmentFilter : 'all'
-    const segmentInventa = activeSegment === 'all'
+    const segmentInventa = (activeSegment === 'all'
         ? inventaProducts
         : inventaProducts.filter(p => p.inventaSegment === activeSegment)
+    ).flatMap(expandInventaVariants)
 
     return (
         <div>
@@ -521,6 +541,7 @@ export default function Inventory() {
                                     categoryId: p.categoryId || p.category || '',
                                     supplierId: p.supplierId || '',
                                     supplierName: p.supplierName || p.brand || 'InventaAPI',
+                                    imageUrl: p.imageUrl || p.image_url || '',
                                     isActive: true,
                                     isArchived: false,
                                     unit: p.unit || 'pcs'
