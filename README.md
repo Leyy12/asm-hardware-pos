@@ -8,9 +8,25 @@ Sales and inventory system for ASM Hardware (React + Vite, Firebase, InventaAPI 
    ```bash
    npm install
    ```
-2. Make your settings file (once): copy `.env.example` to `.env` in this same folder, then fill it in.
-   ```bash
-   cp .env.example .env
+2. Make your settings file (once): create a file named `.env` in this same folder
+   (next to `package.json`) and put these lines in it. Fill in the values after the `=`.
+   ```
+   # InventaAPI: inventaapi.shop → API Keys → Copy. Leave a line empty if you don't use that segment.
+   INVENTA_API_KEY_HARDWARE=
+   INVENTA_API_KEY_GROCERY=
+   INVENTA_API_KEY_PHARMACY=
+   INVENTA_API_URL=https://inventaapi.shop
+
+   # Firebase: Firebase console → Project settings → Your apps → Web app config
+   VITE_FIREBASE_API_KEY=
+   VITE_FIREBASE_AUTH_DOMAIN=
+   VITE_FIREBASE_PROJECT_ID=
+   VITE_FIREBASE_STORAGE_BUCKET=
+   VITE_FIREBASE_MESSAGING_SENDER_ID=
+   VITE_FIREBASE_APP_ID=
+
+   # Chatbot
+   VITE_NVIDIA_API_KEY=
    ```
 3. Start it:
    ```bash
@@ -24,7 +40,7 @@ That's the only command. There is no separate server to start.
 ## Where settings go
 
 There is **one** settings file: `.env` in the project root (next to `package.json`).
-`.env.example` lists every setting with a note on where to get it.
+The list of settings is in step 2 above.
 
 | What | Setting names | Where to get it |
 |---|---|---|

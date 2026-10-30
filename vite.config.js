@@ -6,7 +6,7 @@ import { configuredKeys, inventaApiUrl, loadInventaCatalog } from './api/_lib/in
 
 // Local development only: `npm run dev` answers /api/inventa/products itself,
 // using the same code as the Vercel function, so no second server is needed.
-// Settings come from the .env file in the project root (see .env.example).
+// Settings come from the .env file in the project root (see README.md).
 function inventaDevApi() {
   let env = {}
   return {
