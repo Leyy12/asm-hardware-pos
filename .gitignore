@@ -7,3 +7,4 @@ dist
 # ASM Backend secrets — NEVER commit
 server/.env
 server/node_modules
+.vercel
