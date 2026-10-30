@@ -22,6 +22,25 @@ const emptyProduct = {
 
 const PAGE_SIZE = 10
 
+// InventaAPI returns each product once, with the variants the customer chose in
+// `variants` (e.g. Adjustable Wrench: 8, 10 and 12 inch). Show one row per variant.
+function expandInventaVariants(p) {
+    const variants = Array.isArray(p.variants) ? p.variants.filter(v => v && typeof v === 'object') : []
+    if (variants.length === 0) return [p]
+    return variants.map((v, i) => ({
+        ...p,
+        id: variants.length > 1 ? `${p.id}__${v.sku || i}` : p.id,
+        inventaProductId: p.id,
+        name: v.flavor ? `${p.name} (${v.flavor})` : p.name,
+        sku: v.sku || p.sku,
+        size: v.size || p.size,
+        flavor: v.flavor || null,
+        image_url: v.image_url || p.image_url,
+        expirationDate: v.expirationDate || p.expirationDate,
+        stock: v.stock !== undefined ? v.stock : p.stock,
+    }))
+}
+
 export default function Inventory() {
     const { settings } = useAuth()
     const defaultThreshold = settings?.lowStockAlert ?? 5
@@ -31,6 +50,8 @@ export default function Inventory() {
     const [inventaProducts, setInventaProducts] = useState([])
     const [inventaLoading, setInventaLoading] = useState(true)
     const [inventaError, setInventaError] = useState(null)
+    const [inventaSegments, setInventaSegments] = useState([]) // per-key results from the backend
+    const [segmentFilter, setSegmentFilter] = useState('all') // 'all', 'Hardware', 'Grocery', 'Pharmacy'
     const [categories, setCategories] = useState([])
     const [suppliers, setSuppliers] = useState([])
     const [recommendations, setRecommendations] = useState([]) // New Intelligent Acquisition Recommendations
@@ -95,7 +116,8 @@ export default function Inventory() {
     const loadInventaProducts = async () => {
         setInventaLoading(true)
         setInventaError(null)
-        const { ok, data, error } = await fetchInventaProducts()
+        const { ok, data, segments, error } = await fetchInventaProducts()
+        setInventaSegments(segments || [])
         if (!ok) {
             setInventaError(error)
             setInventaProducts([])
@@ -312,6 +334,16 @@ export default function Inventory() {
 
     const pendingRecos = recommendations.filter(r => r.status === 'pending')
 
+    // InventaAPI products narrowed to the chosen segment (each comes from one segment key).
+    // If the chosen segment is no longer loaded (e.g. after a retry), show all.
+    const loadedSegments = inventaSegments.filter(s => s.ok)
+    const failedSegments = inventaSegments.filter(s => !s.ok)
+    const activeSegment = loadedSegments.some(s => s.segment === segmentFilter) ? segmentFilter : 'all'
+    const segmentInventa = (activeSegment === 'all'
+        ? inventaProducts
+        : inventaProducts.filter(p => p.inventaSegment === activeSegment)
+    ).flatMap(expandInventaVariants)
+
     return (
         <div>
             <div className="page-header">
@@ -414,6 +446,14 @@ export default function Inventory() {
                     <option value="inventa">InventaAPI Only</option>
                     <option value="new-inventa">New from InventaAPI</option>
                 </select>
+                {loadedSegments.length > 1 && (
+                    <select className="form-select" style={{ width: 170 }} value={activeSegment} onChange={e => { setSegmentFilter(e.target.value); setCurrentPage(1) }}>
+                        <option value="all">All Segments</option>
+                        {loadedSegments.map(s => (
+                            <option key={s.segment} value={s.segment}>{s.segment} ({s.count})</option>
+                        ))}
+                    </select>
+                )}
                 {inventaError && (
                     <button onClick={loadInventaProducts} className="btn" style={{ background: 'var(--warning-bg)', color: 'var(--warning)', border: '1px solid var(--warning-border)', display: 'flex', alignItems: 'center', gap: 8 }}>
                         <RefreshCw size={14} /> Retry InventaAPI
@@ -441,11 +481,23 @@ export default function Inventory() {
                     <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--danger)' }}>{inventaError}</p>
                 </div>
             )}
+            {!inventaLoading && !inventaError && failedSegments.length > 0 && (
+                <div style={{ padding: '12px 16px', marginBottom: 16, background: 'var(--warning-bg)', border: '1px solid var(--warning-border)', borderRadius: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                        <Database size={16} style={{ color: 'var(--warning)' }} />
+                        <strong style={{ fontSize: '0.9rem', color: 'var(--warning)' }}>Some InventaAPI keys did not load</strong>
+                    </div>
+                    {failedSegments.map(s => (
+                        <p key={s.segment} style={{ margin: 0, fontSize: '0.82rem', color: 'var(--warning)' }}>{s.segment} key: {s.error}</p>
+                    ))}
+                </div>
+            )}
             {!inventaLoading && !inventaError && inventaProducts.length > 0 && (
                 <div style={{ padding: '12px 16px', marginBottom: 16, background: 'var(--success-bg)', border: '1px solid var(--success-border)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 10 }}>
                     <CheckCircle size={16} style={{ color: 'var(--success)' }} />
                     <span style={{ fontSize: '0.9rem', color: 'var(--success)' }}>
                         {inventaProducts.length} InventaAPI product{inventaProducts.length !== 1 ? 's' : ''} loaded
+                        {loadedSegments.length > 0 && ` (${loadedSegments.map(s => `${s.segment}: ${s.count}`).join(', ')})`}
                     </span>
                 </div>
             )}
@@ -478,7 +530,7 @@ export default function Inventory() {
                             
                             // Add InventaAPI products with source indicator
                             if (viewMode === 'all' || viewMode === 'inventa' || viewMode === 'new-inventa') {
-                                const inventaProductsWithSource = inventaProducts.map(p => ({ 
+                                const inventaProductsWithSource = segmentInventa.map(p => ({ 
                                     ...p, 
                                     source: 'inventa',
                                     // Normalize field names for consistent display
@@ -489,6 +541,7 @@ export default function Inventory() {
                                     categoryId: p.categoryId || p.category || '',
                                     supplierId: p.supplierId || '',
                                     supplierName: p.supplierName || p.brand || 'InventaAPI',
+                                    imageUrl: p.imageUrl || p.image_url || '',
                                     isActive: true,
                                     isArchived: false,
                                     unit: p.unit || 'pcs'
@@ -546,7 +599,7 @@ export default function Inventory() {
                                                 {p.source === 'inventa' && (
                                                     <div style={{ fontSize: '0.7rem', color: 'var(--accent)', fontWeight: 600, marginTop: 2 }}>
                                                         <Database size={10} style={{ display: 'inline', marginRight: 4 }} />
-                                                        InventaAPI
+                                                        InventaAPI{p.inventaSegment ? ` · ${p.inventaSegment}` : ''}
                                                     </div>
                                                 )}
                                             </div>
@@ -664,9 +717,9 @@ export default function Inventory() {
                                 allProducts = [...allProducts, ...products]
                             }
                             if (viewMode === 'all' || viewMode === 'inventa' || viewMode === 'new-inventa') {
-                                let inventaToAdd = inventaProducts
+                                let inventaToAdd = segmentInventa
                                 if (viewMode === 'new-inventa') {
-                                    inventaToAdd = inventaProducts.filter(p => isNewInventaProduct({...p, source: 'inventa'}))
+                                    inventaToAdd = segmentInventa.filter(p => isNewInventaProduct({...p, source: 'inventa'}))
                                 }
                                 allProducts = [...allProducts, ...inventaToAdd]
                             }
@@ -708,9 +761,9 @@ export default function Inventory() {
                         allProducts = [...allProducts, ...products]
                     }
                     if (viewMode === 'all' || viewMode === 'inventa' || viewMode === 'new-inventa') {
-                        let inventaToAdd = inventaProducts
+                        let inventaToAdd = segmentInventa
                         if (viewMode === 'new-inventa') {
-                            inventaToAdd = inventaProducts.filter(p => isNewInventaProduct({...p, source: 'inventa'}))
+                            inventaToAdd = segmentInventa.filter(p => isNewInventaProduct({...p, source: 'inventa'}))
                         }
                         allProducts = [...allProducts, ...inventaToAdd]
                     }
