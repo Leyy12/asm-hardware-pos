@@ -1,16 +1,43 @@
-# React + Vite
+# ASM Hardware POS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sales and inventory system for ASM Hardware (React + Vite, Firebase, InventaAPI product catalog).
 
-Currently, two official plugins are available:
+## Run it on your computer
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Install once:
+   ```bash
+   npm install
+   ```
+2. Make your settings file (once): copy `.env.example` to `.env` in this same folder, then fill it in.
+   ```bash
+   cp .env.example .env
+   ```
+3. Start it:
+   ```bash
+   npm run dev
+   ```
+   Open http://localhost:5173. The terminal shows which InventaAPI keys it found, for example
+   `[InventaAPI] Keys found for: Hardware, Grocery, Pharmacy`.
 
-## React Compiler
+That's the only command. There is no separate server to start.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Where settings go
 
-## Expanding the ESLint configuration
+There is **one** settings file: `.env` in the project root (next to `package.json`).
+`.env.example` lists every setting with a note on where to get it.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| What | Setting names | Where to get it |
+|---|---|---|
+| InventaAPI keys | `INVENTA_API_KEY_HARDWARE`, `INVENTA_API_KEY_GROCERY`, `INVENTA_API_KEY_PHARMACY` | inventaapi.shop → API Keys → Copy |
+| Firebase | `VITE_FIREBASE_*` | Firebase console → Project settings → Web app |
+| Chatbot | `VITE_NVIDIA_API_KEY` | NVIDIA API dashboard |
+
+- **Changing an InventaAPI key:** paste the new key into `.env`, then stop `npm run dev` (Ctrl+C) and start it again.
+- `.env` is never uploaded to GitHub (it's in `.gitignore`).
+- **Live site (Vercel)** doesn't read `.env`. Set the same names in Vercel → Project → Settings → Environment Variables, then redeploy.
+- InventaAPI keys stay on the server and are never sent to the browser. Anything starting with `VITE_` is built into the website and can be seen by visitors.
+
+## How the InventaAPI catalog is loaded
+
+The browser calls `/api/inventa/products`. That route calls InventaAPI once per segment key and combines the results.
+The same code (`api/_lib/inventaCatalog.js`) runs locally inside `npm run dev` and on Vercel as `api/inventa/products.js`.

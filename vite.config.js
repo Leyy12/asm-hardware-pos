@@ -1,10 +1,57 @@
-import { defineConfig } from 'vite'
+/* global process */
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { configuredKeys, inventaApiUrl, loadInventaCatalog } from './api/_lib/inventaCatalog.js'
+
+// Local development only: `npm run dev` answers /api/inventa/products itself,
+// using the same code as the Vercel function, so no second server is needed.
+// Settings come from the .env file in the project root (see .env.example).
+function inventaDevApi() {
+  let env = {}
+  return {
+    name: 'asm-inventa-dev-api',
+    apply: 'serve',
+    configResolved(config) {
+      const rootEnv = loadEnv(config.mode, config.root, '')
+      // Older setups kept the keys in server/.env. Still read it, but say to move them.
+      const oldServerEnv = loadEnv(config.mode, `${config.root}/server`, '')
+      const oldKeys = Object.keys(oldServerEnv).filter(k => k.startsWith('INVENTA_') && !(k in rootEnv) && !(k in process.env))
+      if (oldKeys.length) {
+        config.logger.warn(`[InventaAPI] Found ${oldKeys.join(', ')} in server/.env. Move them to the .env file in the project root; server/.env is no longer used.`)
+      }
+      env = { ...oldServerEnv, ...rootEnv }
+      const segments = configuredKeys(env).map(k => k.segment)
+      config.logger.info(segments.length
+        ? `[InventaAPI] Keys found for: ${segments.join(', ')} → ${inventaApiUrl(env)}`
+        : '[InventaAPI] No keys found. Add INVENTA_API_KEY_HARDWARE (and/or _GROCERY, _PHARMACY) to .env in the project root.')
+    },
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const url = new URL(req.url || '/', 'http://localhost')
+        const send = (status, body) => {
+          res.statusCode = status
+          res.setHeader('Content-Type', 'application/json')
+          res.setHeader('Cache-Control', 'no-store')
+          res.end(JSON.stringify(body))
+        }
+        if (url.pathname === '/api/health') return send(200, { status: 'ok', timestamp: new Date().toISOString() })
+        if (url.pathname !== '/api/inventa/products') return next()
+        if (req.method !== 'GET') return send(405, { error: 'Method Not Allowed' })
+        const { status, body } = await loadInventaCatalog({ env, segment: url.searchParams.get('segment') })
+        for (const s of body.segments || []) {
+          if (!s.ok) server.config.logger.warn(`[InventaAPI] ${s.segment} key failed: ${s.error}`)
+        }
+        send(status, body)
+      })
+    },
+  }
+}
 
 export default defineConfig({
   plugins: [
     react(),
+    inventaDevApi(),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: { enabled: true }, // Enable PWA in dev mode too
@@ -117,14 +164,8 @@ export default defineConfig({
         target: 'https://integrate.api.nvidia.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/nvidia-api/, '')
-      },
-      // ── Secure InventaAPI proxy ──────────────────────────────────────────
-      // All /api/* requests from the browser are forwarded to the ASM backend.
-      // The browser NEVER talks directly to InventaAPI (localhost:5002).
-      '/api': {
-        target: 'http://localhost:3002',
-        changeOrigin: true
       }
+      // /api/inventa/products and /api/health are answered by inventaDevApi() above.
     }
   }
 })

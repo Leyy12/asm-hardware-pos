@@ -1,6 +1,6 @@
 /* global process */
 // Shared InventaAPI catalog loader, used by the Vercel function
-// (api/inventa/products.js) and the local backend (server/index.mjs).
+// (api/inventa/products.js) and `npm run dev` (vite.config.js).
 // Vercel does not turn files in folders starting with "_" into endpoints.
 //
 // InventaAPI gives one API key per segment, and each key returns only the

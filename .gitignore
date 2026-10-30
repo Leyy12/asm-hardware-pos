@@ -1,10 +1,11 @@
 node_modules
 dist
+# Settings with real keys — NEVER commit (copy .env.example to .env instead)
 .env
 .env.local
+.env.*.local
 .DS_Store
 
-# ASM Backend secrets — NEVER commit
-server/.env
-server/node_modules
+# Old local-server folder (no longer used; keys now go in the root .env)
+server/
 .vercel
