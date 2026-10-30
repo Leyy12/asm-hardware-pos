@@ -3,10 +3,9 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     ShoppingCart, RotateCcw, LogOut, ChevronLeft,
-    ChevronRight, Package, MessageSquareText, Bell, Menu, X
+    ChevronRight, Package, Menu, X
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
-import ChatBot from '../chatbot/ChatBot'
 import '../../styles/layout.css'
 
 const navItems = [
@@ -18,7 +17,6 @@ export default function CashierLayout({ children }) {
     const [collapsed, setCollapsed] = useState(false)
     const [mobileOpen, setMobileOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
-    const [chatOpen, setChatOpen] = useState(false)
     const { userProfile, logout } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
@@ -32,9 +30,11 @@ export default function CashierLayout({ children }) {
     }, [])
 
     // Close drawer on route change (mobile)
-    useEffect(() => {
+    const [prevPath, setPrevPath] = useState(location.pathname)
+    if (location.pathname !== prevPath) {
+        setPrevPath(location.pathname)
         if (isMobile) setMobileOpen(false)
-    }, [location.pathname, isMobile])
+    }
 
     // Prevent body scroll when drawer is open on mobile
     useEffect(() => {
@@ -87,7 +87,7 @@ export default function CashierLayout({ children }) {
                                 exit={{ opacity: 0, width: 0 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <span className="logo-name">ASM</span>
+                                <span className="logo-name">ASM HARDWARE</span>
                                 <span className="logo-sub">Cashier Portal</span>
                             </motion.div>
                         )}
@@ -140,57 +140,38 @@ export default function CashierLayout({ children }) {
                             </AnimatePresence>
                         </NavLink>
                     ))}
+
+                    {/* Spacer — pushes logout to the bottom */}
+                    <div style={{ flex: 1 }} />
+
+                    {/* Logout — pinned to bottom */}
+                    <button className="nav-item" onClick={handleLogout} title="Logout"
+                        style={{ width: 'calc(100% - 16px)', textAlign: 'left' }}>
+                        <LogOut size={20} className="nav-icon" style={{ color: 'var(--danger)' }} />
+                        <AnimatePresence>
+                            {showLabels && (
+                                <motion.span className="nav-label"
+                                    initial={{ opacity: 0, width: 0 }}
+                                    animate={{ opacity: 1, width: 'auto' }}
+                                    exit={{ opacity: 0, width: 0 }}
+                                    transition={{ duration: 0.2 }}>
+                                    Logout
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </button>
                 </nav>
 
-                {/* AI Chat button */}
-                <button
-                    className={`nav-item chat-nav-btn ${chatOpen ? 'active' : ''}`}
-                    onClick={() => setChatOpen(!chatOpen)}
-                    title="AI Assistant"
-                    style={{ marginBottom: 8 }}
-                >
-                    <MessageSquareText size={20} className="nav-icon" />
-                    <AnimatePresence>
-                        {showLabels && (
-                            <motion.span className="nav-label"
-                                initial={{ opacity: 0, width: 0 }}
-                                animate={{ opacity: 1, width: 'auto' }}
-                                exit={{ opacity: 0, width: 0 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                AI Assistant
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
-                </button>
-
-                {/* User info */}
-                <div className="sidebar-user">
-                    <div className="user-avatar">
-                        {userProfile?.name?.charAt(0) || 'C'}
-                    </div>
-                    <AnimatePresence>
-                        {showLabels && (
-                            <motion.div
-                                className="user-info"
-                                initial={{ opacity: 0, width: 0 }}
-                                animate={{ opacity: 1, width: 'auto' }}
-                                exit={{ opacity: 0, width: 0 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <span className="user-name">{userProfile?.name || 'Cashier'}</span>
-                                <span className="user-role">Shop Cashier</span>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                    <button className="logout-btn" onClick={handleLogout} title="Logout">
-                        <LogOut size={16} />
-                    </button>
-                </div>
             </motion.aside>
 
             {/* ---- Main ---- */}
-            <div className="layout-main">
+            <div
+                className="layout-main"
+                style={!isMobile ? {
+                    marginLeft: collapsed ? 'var(--sidebar-collapsed)' : 'var(--sidebar-w)',
+                    transition: 'margin-left 0.25s ease',
+                } : {}}
+            >
                 {/* Top bar */}
                 <header className="topbar">
                     <div className="topbar-left">
@@ -205,9 +186,8 @@ export default function CashierLayout({ children }) {
                         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Terminal Active</h2>
                     </div>
                     <div className="topbar-right">
-                        <Bell size={20} className="topbar-icon" />
                         <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 8px' }} />
-                        <span className="topbar-greeting">Counter: <strong>{userProfile?.name || 'Cashier'}</strong></span>
+                        <span className="topbar-greeting">Cashier: <strong>{userProfile?.name || 'Cashier'}</strong></span>
                         <div className="user-avatar" style={{ width: 32, height: 32, fontSize: '0.8rem' }}>
                             {userProfile?.name?.charAt(0) || 'C'}
                         </div>
@@ -227,8 +207,6 @@ export default function CashierLayout({ children }) {
                 </main>
             </div>
 
-            {/* Chatbot panel */}
-            <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />
         </div>
     )
 }

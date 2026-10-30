@@ -2,19 +2,20 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     collection, onSnapshot, doc, runTransaction,
-    serverTimestamp, query, where, getDocs, updateDoc
+    serverTimestamp, query, where, getDocs, addDoc
 } from 'firebase/firestore'
 import { db, auth } from '../../firebase'
 import { formatCurrency, generateTransactionId } from '../../utils/helpers'
 import {
     Search, Trash2, ShoppingCart, Camera, Keyboard,
-    RotateCcw, Calendar, Receipt, Package, Printer, Check, History, X
+    Calendar, Receipt, Package, Printer, Check, History, X, AlertTriangle, Lightbulb
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
 import QRScanner from '../../components/pos/QRScanner'
 import toast from 'react-hot-toast'
 import '../../styles/pos.css'
+
+const getNow = () => Date.now()
 
 export default function POS() {
     const [products, setProducts] = useState([])
@@ -23,9 +24,6 @@ export default function POS() {
     const [skuInput, setSkuInput] = useState('')
     const [scannerActive, setScannerActive] = useState(false)
     const [tendered, setTendered] = useState('')
-    const [discountCard, setDiscountCard] = useState('')
-    const [cardValidated, setCardValidated] = useState(null) // { id, cardNumber, discount }
-    const [validatingCard, setValidatingCard] = useState(false)
     const [processing, setProcessing] = useState(false)
     const [receipt, setReceipt] = useState(null)
     const [todaySales, setTodaySales] = useState(0)
@@ -33,9 +31,18 @@ export default function POS() {
     const [todayItems, setTodayItems] = useState(0)
     const [recentSalesList, setRecentSalesList] = useState([])
     const [showRecentModal, setShowRecentModal] = useState(false)
+    
+    // Intelligent Product Acquisition State
+    const [recoBarcode, setRecoBarcode] = useState(null)
+    const [suggestedName, setSuggestedName] = useState('')
+    const [submittingReco, setSubmittingReco] = useState(false)
+
+    const rewardCard = ''
+    const cardValidated = null
+    const validatingCard = false
+
     const skuRef = useRef(null)
-    const { userProfile } = useAuth()
-    const navigate = useNavigate()
+    const { userProfile, settings } = useAuth()
 
     // Load products
     useEffect(() => {
@@ -76,42 +83,108 @@ export default function POS() {
     // SKU search handler
     const handleSKUSearch = async () => {
         const sku = skuInput.trim()
-        if (!sku) return toast.error('Enter SKU or product name.')
-        const found = products.find(p =>
-            p.sku?.toLowerCase() === sku.toLowerCase() ||
-            p.name?.toLowerCase().includes(sku.toLowerCase())
-        )
-        if (!found) return toast.error('Product not found.')
-        if (found.stock <= 0) return toast.error('Out of stock!')
-        addToCart(found)
-        setSkuInput('')
-        skuRef.current?.focus()
+        if (!sku) return toast.error('Enter barcode number, SKU, or product name.')
+        
+        try {
+            // Fetch from DaaS API first (Simulating SME consuming the API)
+            const res = await fetch(`http://localhost:5000/api/v1/products/barcode/${sku}`)
+            if (res.status === 404) {
+                const errorData = await res.json()
+                if (/^\d+$/.test(sku)) {
+                    setRecoBarcode(sku)
+                    setSuggestedName(`Unregistered Item (${sku})`)
+                    toast.error(errorData.message || 'Product not found.')
+                } else {
+                    toast.error('Product not found.')
+                }
+                return
+            }
+            if (!res.ok) throw new Error('API Error')
+            
+            const { product } = await res.json()
+            if (product.stock <= 0) return toast.error('Out of stock!')
+            addToCart(product)
+            setSkuInput('')
+            skuRef.current?.focus()
+        } catch (err) {
+            // Fallback to local search if API connection fails (e.g. searching by name instead of barcode)
+            const found = products.find(p => p.barcodeNumber === sku)
+                || products.find(p => p.id.toLowerCase() === sku.toLowerCase())
+                || products.find(p => p.sku?.toLowerCase() === sku.toLowerCase())
+                || products.find(p => p.name?.toLowerCase().includes(sku.toLowerCase()))
+                
+            if (!found) {
+                if (/^\d+$/.test(sku)) {
+                    setRecoBarcode(sku)
+                    setSuggestedName(`Unregistered Item (${sku})`)
+                } else {
+                    toast.error('Product not found.')
+                }
+                return
+            }
+            if (found.stock <= 0) return toast.error('Out of stock!')
+            addToCart(found)
+            setSkuInput('')
+            skuRef.current?.focus()
+        }
     }
 
-    // QR scan handler - keeping a cache of last scanned to prevent rapid dupe scans
-    const lastScanRef = useRef({ text: '', time: 0 })
-
-    const handleQRScan = (decoded) => {
-        // Prevent rapid duplicate scans within 1.5 seconds
-        const now = Date.now()
+    const handleBarcodeScan = async (decoded) => {
+        const now = getNow()
         if (lastScanRef.current.text === decoded && (now - lastScanRef.current.time) < 1500) return
         lastScanRef.current = { text: decoded, time: now }
 
-        const found = products.find(p => {
-            const skuValid = p.sku && p.sku.trim() !== ''
-            return (skuValid && (p.sku === decoded || decoded.includes(p.sku))) ||
-                p.id === decoded || decoded.includes(p.id)
-        })
+        const trimmed = decoded.trim()
 
-        if (!found) {
-            toast.error(`No product for scanned code`, { id: 'qr-err' })
-            return
+        try {
+            // Query the DaaS API explicitly to demonstrate API usage to the panel
+            const res = await fetch(`http://localhost:5000/api/v1/products/barcode/${trimmed}`)
+            
+            if (res.status === 404) {
+                const errorData = await res.json()
+                // Unregistered barcode scanned: Trigger Intelligent Acquisition modal
+                setScannerActive(false)
+                setRecoBarcode(trimmed)
+                setSuggestedName(`Unregistered Barcode Item (${trimmed})`)
+                
+                // Show the specific message from the API DaaS fallback logic
+                toast.error(errorData.message || `Barcode ${trimmed} not found. Launching Intelligent Recommendation Engine...`, { id: 'barcode-err' })
+                return
+            }
+            
+            if (!res.ok) throw new Error('API Error')
+            
+            const { product } = await res.json()
+            if (product.stock <= 0) {
+                toast.error(`${product.name} is out of stock!`, { id: 'barcode-stock' })
+                return
+            }
+            addToCart(product)
+        } catch (err) {
+            toast.error("Failed to connect to DaaS API. " + err.message)
         }
-        if (found.stock <= 0) {
-            toast.error(`${found.name} is out of stock!`, { id: 'qr-stock' })
-            return
+    }
+
+    const handleSendRecommendation = async () => {
+        if (!recoBarcode) return
+        setSubmittingReco(true)
+        try {
+            await addDoc(collection(db, 'recommendations'), {
+                barcode: recoBarcode,
+                suggestedName: suggestedName || `New Scanned Item (${recoBarcode})`,
+                businessType: settings?.businessType || 'hardware',
+                status: 'pending',
+                submittedBy: userProfile?.name || 'Cashier Terminal',
+                createdAt: serverTimestamp()
+            })
+            toast.success('Acquisition recommendation uploaded! Admin has been notified.')
+            setRecoBarcode(null)
+            setSuggestedName('')
+        } catch (err) {
+            toast.error('Failed to upload recommendation.')
+        } finally {
+            setSubmittingReco(false)
         }
-        addToCart(found)
     }
 
     const addToCart = (product) => {
@@ -138,39 +211,12 @@ export default function POS() {
 
     const removeItem = (id) => setCart(prev => prev.filter(i => i.id !== id))
 
-    // Calculate totals
     const subtotal = cart.reduce((s, i) => s + i.subtotal, 0)
-    const hasDiscount = !!cardValidated
-    const discountPct = cardValidated ? (cardValidated.discount / 100) : 0
-    const discountAmt = subtotal * discountPct
-    const total = subtotal - discountAmt
+    const hasRewardCard = !!cardValidated
+    const conversionRate = (settings.defaultDiscount ?? 10) / 100
+    const pointsToEarn = Math.floor(subtotal * conversionRate)
+    const total = subtotal
     const change = Number(tendered) - total
-
-    // Verify discount card against Firestore
-    const handleVerifyCard = async () => {
-        const num = discountCard.trim().toUpperCase()
-        if (!num) return toast.error('Enter a card number.')
-        setValidatingCard(true)
-        try {
-            const snap = await getDocs(
-                query(collection(db, 'discountCards'),
-                    where('cardNumber', '==', num),
-                    where('status', '==', 'active'))
-            )
-            if (snap.empty) {
-                setCardValidated(null)
-                toast.error('Invalid or already used card.')
-            } else {
-                const card = { id: snap.docs[0].id, ...snap.docs[0].data() }
-                setCardValidated(card)
-                toast.success(`✅ Card valid! Applied to ${card.customerName || 'Customer'}.`)
-            }
-        } catch {
-            toast.error('Could not verify card.')
-        } finally {
-            setValidatingCard(false)
-        }
-    }
 
     const handleCheckout = async () => {
         if (cart.length === 0) return toast.error('Cart is empty.')
@@ -183,24 +229,11 @@ export default function POS() {
                     const pRef = doc(db, 'products', item.id)
                     const pSnap = await tx.get(pRef)
                     if (!pSnap.exists()) throw new Error(`Product ${item.name} not found.`)
-                    const currentStock = pSnap.data().stock
+                    const currentStock = Number(pSnap.data().stock) || 0
                     if (currentStock < item.qty) throw new Error(`Insufficient stock for ${item.name}.`)
                     tx.update(pRef, { stock: currentStock - item.qty, updatedAt: serverTimestamp() })
                 }
-                // If a discount card is used, mark it as 'used'
-                if (cardValidated) {
-                    const cardRef = doc(db, 'discountCards', cardValidated.id)
-                    const cardSnap = await tx.get(cardRef)
-                    if (!cardSnap.exists() || cardSnap.data().status !== 'active') {
-                        throw new Error('Discount card is no longer valid.')
-                    }
-                    tx.update(cardRef, {
-                        status: 'used',
-                        usedAt: serverTimestamp(),
-                        transactionId,
-                        usedBy: userProfile?.name || 'Cashier'
-                    })
-                }
+                
                 const saleRef = doc(collection(db, 'sales'))
                 tx.set(saleRef, {
                     transactionId,
@@ -208,27 +241,28 @@ export default function POS() {
                     cashierName: userProfile?.name || 'Cashier',
                     items: cart.map(i => ({ productId: i.id, name: i.name, qty: i.qty, price: i.price, subtotal: i.subtotal })),
                     subtotal,
-                    discount: discountAmt,
-                    discountCard: discountCard || '',
+                    pointsEarned: hasRewardCard ? pointsToEarn : 0,
+                    rewardCardNumber: rewardCard || '',
+                    rewardCardCustomer: cardValidated?.customerName || '',
                     total,
                     tendered: Number(tendered),
                     change: Number(tendered) - total,
                     paymentMethod: 'cash',
                     status: 'completed',
+                    businessType: settings?.businessType || 'hardware', // Sync segment
                     createdAt: serverTimestamp()
                 })
             })
             setReceipt({
                 transactionId, items: [...cart],
-                subtotal, discountAmt, discountPct,
+                subtotal, pointsEarned: hasRewardCard ? pointsToEarn : 0,
                 total, tendered: Number(tendered), change,
                 cashierName: userProfile?.name || 'Cashier',
+                rewardCardUsed: cardValidated?.customerName || '',
                 date: new Date()
             })
             setCart([])
             setTendered('')
-            setDiscountCard('')
-            setCardValidated(null)
             toast.success('Transaction complete!')
         } catch (err) {
             toast.error(err.message || 'Transaction failed.')
@@ -239,15 +273,14 @@ export default function POS() {
 
     const handlePrint = () => window.print()
 
-    // ---- Receipt View ----
     if (receipt) {
         return (
             <div className="pos-receipt-root">
                 <div className="pos-receipt-card" id="printable-receipt">
                     <div className="receipt-store-header">
                         <Package size={28} style={{ marginBottom: 6, opacity: 0.8 }} />
-                        <h2 style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}>ASM HARDWARE</h2>
-                        <p style={{ letterSpacing: '0.05em' }}>& GENERAL MERCHANDISE</p>
+                        <h2 style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em' }}>{settings?.storeName || 'ASM HARDWARE'}</h2>
+                        <p style={{ letterSpacing: '0.05em' }}>OFFICIAL TERMINAL RECEIPT</p>
                         <p style={{ fontSize: '0.65rem', marginTop: 6, fontWeight: 600 }}>OFFICIAL RECEIPT</p>
                     </div>
                     <div className="receipt-divider dashed" />
@@ -267,7 +300,9 @@ export default function POS() {
                         {receipt.items.map((item, i) => (
                             <div key={i} className="receipt-item-row">
                                 <div className="receipt-item-details">
-                                    <span className="receipt-item-name">{item.name}</span>
+                                    <span className="receipt-item-name">
+                                        {item.name} {item.size ? `(${item.size})` : ''}
+                                    </span>
                                     <span className="receipt-item-price-calc">{item.qty} x {item.price.toFixed(2)}</span>
                                 </div>
                                 <span className="receipt-item-total">{item.subtotal.toFixed(2)}</span>
@@ -281,12 +316,6 @@ export default function POS() {
                             <span>SUBTOTAL</span>
                             <span>{receipt.subtotal.toFixed(2)}</span>
                         </div>
-                        {receipt.discountAmt > 0 && (
-                            <div className="receipt-total-row">
-                                <span>DISCOUNT</span>
-                                <span>-{receipt.discountAmt.toFixed(2)}</span>
-                            </div>
-                        )}
                         <div className="receipt-grand-total-block">
                             <span>TOTAL</span>
                             <span>₱{receipt.total.toFixed(2)}</span>
@@ -305,14 +334,11 @@ export default function POS() {
                     
                     <div className="receipt-footer">
                         <p>SERVED BY: {receipt.cashierName.toUpperCase()}</p>
-                        
-                        {/* Decorative Barcode */}
                         <div className="receipt-barcode">
                             || ||| | ||| || || | ||| ||| |
                             <span className="receipt-barcode-text">{receipt.transactionId}</span>
                         </div>
-                        
-                        <p style={{ marginTop: 16 }}>THANK YOU FOR SHOPPING!</p>
+                        <p style={{ marginTop: 16 }}>{settings?.receiptFooter || 'THANK YOU FOR SHOPPING!'}</p>
                         <p style={{ fontSize: '0.65rem' }}>THIS RECEIPT IS YOUR PROOF OF PURCHASE.</p>
                     </div>
                 </div>
@@ -328,10 +354,9 @@ export default function POS() {
         )
     }
 
-    // ---- Main POS View ----
     return (
         <div className="pos-v2-root">
-            {/* ---- KPI Cards ---- */}
+            {/* KPI Cards */}
             <div className="pos-kpi-row">
                 <div className="pos-kpi-card">
                     <div>
@@ -363,21 +388,8 @@ export default function POS() {
                 </div>
             </div>
 
-            {/* ---- Action Buttons ---- */}
-            <div style={{ marginBottom: 20, display: 'flex', gap: 12 }}>
-                <button className="btn btn-secondary" onClick={() => navigate('/cashier/refund')}
-                    style={{ gap: 8, borderRadius: 12, border: '2px solid var(--text-primary)', fontWeight: 700 }}>
-                    <RotateCcw size={16} /> Request Refund
-                </button>
-                <button className="btn btn-secondary" onClick={() => setShowRecentModal(true)}
-                    style={{ gap: 8, borderRadius: 12, border: '2px solid var(--border)', fontWeight: 700 }}>
-                    <History size={16} /> Recent Transactions
-                </button>
-            </div>
-
-            {/* ---- Main Panel ---- */}
+            {/* Main Panel */}
             <div className="pos-v2-panel">
-                {/* LEFT: Scanner/Input */}
                 <div className="pos-v2-left">
                     {/* Mode Tabs */}
                     <div className="pos-mode-tabs">
@@ -411,8 +423,11 @@ export default function POS() {
                                 <div style={{ position: 'relative' }}>
                                     <QRScanner
                                         active={scannerActive}
-                                        onScan={(decoded) => { handleQRScan(decoded) }}
-                                        onError={() => { setScannerActive(false); toast.error('Camera access denied or unavailable.') }}
+                                        onScan={(decoded) => { handleBarcodeScan(decoded) }}
+                                        onError={() => {
+                                            setScannerActive(false)
+                                            toast.error('Camera unavailable. Please allow camera access.', { duration: 5000 })
+                                        }}
                                     />
                                     <button className="btn btn-secondary" style={{ marginTop: 8, width: '100%' }}
                                         onClick={() => setScannerActive(false)}>
@@ -427,7 +442,7 @@ export default function POS() {
                                 ref={skuRef}
                                 id="sku-input"
                                 className="form-input"
-                                placeholder="Enter SKU or product name…"
+                                placeholder="Enter SKU or barcode number..."
                                 value={skuInput}
                                 onChange={e => setSkuInput(e.target.value)}
                                 onKeyDown={e => e.key === 'Enter' && handleSKUSearch()}
@@ -455,7 +470,12 @@ export default function POS() {
                                     animate={{ opacity: 1, x: 0 }}
                                 >
                                     <div className="pos-cart-item-info">
-                                        <span className="pos-cart-item-name">{item.name}</span>
+                                        <span className="pos-cart-item-name" style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                                            {item.name}
+                                            {item.size && (
+                                                <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 600 }}>({item.size})</span>
+                                            )}
+                                        </span>
                                         <span className="pos-cart-item-price">{formatCurrency(item.price)}</span>
                                     </div>
                                     <div className="pos-cart-item-controls">
@@ -479,7 +499,6 @@ export default function POS() {
                     </div>
                 </div>
 
-                {/* RIGHT: Transaction Summary */}
                 <div className="pos-v2-right">
                     <h3 className="pos-summary-title">Transaction Summary</h3>
 
@@ -488,63 +507,11 @@ export default function POS() {
                             <span>Subtotal:</span>
                             <span>{formatCurrency(subtotal)}</span>
                         </div>
-                        <div className="pos-summary-row" style={{ color: '#388E3C' }}>
-                            <span>Discount ({Math.round(discountPct * 100)}%):</span>
-                            <span>-{formatCurrency(discountAmt)}</span>
-                        </div>
                         <div className="pos-summary-divider" />
                         <div className="pos-summary-row pos-summary-total">
                             <span>Total:</span>
                             <span>{formatCurrency(total)}</span>
                         </div>
-                        {hasDiscount && (
-                            <div className="pos-summary-row" style={{ color: '#388E3C', fontSize: '0.8rem' }}>
-                                <span>You Saved:</span>
-                                <span>{formatCurrency(discountAmt)}</span>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="pos-summary-field">
-                        <label className="pos-summary-label">Discount Card</label>
-                        {cardValidated ? (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', background: '#f0fdf4', border: '1.5px solid #86efac', borderRadius: 10 }}>
-                                <Check size={16} style={{ color: '#16a34a', flexShrink: 0 }} />
-                                <div style={{ flex: 1 }}>
-                                    <p style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '0.8rem', color: '#16a34a', margin: 0 }}>
-                                        {cardValidated.cardNumber}
-                                    </p>
-                                    <p style={{ fontSize: '0.7rem', color: '#15803d', margin: 0 }}>
-                                        {cardValidated.discount}% discount applied!
-                                    </p>
-                                </div>
-                                <button
-                                    onClick={() => { setCardValidated(null); setDiscountCard('') }}
-                                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#dc2626', fontSize: '0.75rem', fontWeight: 600 }}
-                                >
-                                    Remove
-                                </button>
-                            </div>
-                        ) : (
-                            <div style={{ display: 'flex', gap: 8 }}>
-                                <input
-                                    className="form-input"
-                                    placeholder="Enter card number (ASM-XXXX-XXXX-XXXX)…"
-                                    value={discountCard}
-                                    onChange={e => { setDiscountCard(e.target.value.toUpperCase()); setCardValidated(null) }}
-                                    onKeyDown={e => e.key === 'Enter' && handleVerifyCard()}
-                                    style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}
-                                />
-                                <button
-                                    className="btn btn-secondary"
-                                    onClick={handleVerifyCard}
-                                    disabled={validatingCard}
-                                    style={{ flexShrink: 0, fontSize: '0.8rem' }}
-                                >
-                                    {validatingCard ? '…' : 'Verify'}
-                                </button>
-                            </div>
-                        )}
                     </div>
 
                     <div className="pos-summary-field">
@@ -589,6 +556,55 @@ export default function POS() {
                 </div>
             </div>
 
+            {/* Intelligent Product Acquisition Suggestion Modal */}
+            <AnimatePresence>
+                {recoBarcode && (
+                    <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <motion.div className="modal" style={{ maxWidth: 450, padding: 24, border: '1px solid rgba(99, 102, 241, 0.3)' }}
+                            initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}>
+                            
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                                <div style={{ width: 42, height: 42, borderRadius: '50%', background: 'rgba(99, 102, 241, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366F1' }}>
+                                    <Lightbulb size={22} />
+                                </div>
+                                <div>
+                                    <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800 }}>Intelligent Product Suggestion</h3>
+                                    <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-secondary)' }}>DaaS Acquisition Engine Recommendation</p>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 20 }}>
+                                <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                                    The scanned barcode <strong style={{ fontFamily: 'monospace', color: 'var(--text-primary)' }}>{recoBarcode}</strong> was not found in the DaaS product database.
+                                    Would you like to send an acquisition recommendation or add it to the database directly?
+                                </p>
+                                <div className="form-group" style={{ margin: 0 }}>
+                                    <label className="form-label">Suggested Product Name (Optional)</label>
+                                    <input 
+                                        className="form-input" 
+                                        value={suggestedName} 
+                                        onChange={e => setSuggestedName(e.target.value)} 
+                                        placeholder="e.g. Davies Paint, Paracetamol Brand" 
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="modal-footer" style={{ border: 'none', padding: 0, gap: 10, flexWrap: 'wrap' }}>
+                                <button className="btn btn-secondary" onClick={() => { setRecoBarcode(null); setSuggestedName('') }} disabled={submittingReco}>
+                                    Dismiss
+                                </button>
+                                <button className="btn btn-outline" style={{ borderColor: '#10B981', color: '#10B981' }} onClick={() => window.open(`http://localhost:5000/add-product?barcode=${recoBarcode}`, '_blank')}>
+                                    + Add New Product
+                                </button>
+                                <button className="btn btn-primary" style={{ background: '#6366F1' }} onClick={handleSendRecommendation} disabled={submittingReco}>
+                                    {submittingReco ? 'Sending...' : '✔ Send Request'}
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Recent Transactions Modal */}
             <AnimatePresence>
                 {showRecentModal && (
@@ -622,14 +638,14 @@ export default function POS() {
                                                                     transactionId: data.transactionId,
                                                                     items: data.items || [],
                                                                     subtotal: data.subtotal,
-                                                                    discountAmt: data.discount || 0,
-                                                                    discountPct: data.discount ? (data.discount / data.subtotal) : 0,
+                                                                    pointsEarned: data.pointsEarned || 0,
+                                                                    rewardCardUsed: data.rewardCardCustomer || '',
                                                                     total: data.total,
                                                                     tendered: data.tendered,
                                                                     change: data.change,
                                                                     cashierName: data.cashierName,
                                                                     date: ts || new Date()
-                                                                })
+                                                                 })
                                                                 setShowRecentModal(false)
                                                             }}
                                                         >

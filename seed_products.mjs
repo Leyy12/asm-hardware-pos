@@ -53,14 +53,69 @@ async function seed() {
         { name: 'SOLO GLOSS LATEX WHITE', cat: 'Whites', prices: { gal: 565, tin: 2200 } }
     ];
 
+    console.log("Finding or seeding paint suppliers...");
+    const paintSuppliers = [
+        { name: 'Boysen Paints Philippines', contact: 'Juan Dela Cruz', phone: '0917-123-4567', email: 'sales@boysen.com.ph' },
+        { name: 'Davies Paints Philippines, Inc.', contact: 'Maria Santos', phone: '0928-444-8899', email: 'info@daviespaints.com.ph' },
+        { name: 'Nippon Paint Philippines', contact: 'Kenji Sato', phone: '0932-987-6543', email: 'contact@nipponpaint.ph' },
+        { name: 'Island Paints (Charter Chemical)', contact: 'Ana Gonzales', phone: '0945-333-2211', email: 'support@islandpaints.com' },
+        { name: 'Universal Paint & Coatings', contact: 'Robert Lim', phone: '0908-111-2222', email: 'sales@universalpaint.ph' }
+    ];
+    
+    const supplierMap = {};
+    for (const sup of paintSuppliers) {
+        const snap = await getDocs(query(collection(db, 'suppliers'), where('name', '==', sup.name)));
+        if (!snap.empty) {
+            supplierMap[sup.name] = snap.docs[0].id;
+            console.log(`Found existing supplier: ${sup.name} (ID: ${snap.docs[0].id})`);
+        } else {
+            const docRef = await addDoc(collection(db, 'suppliers'), {
+                name: sup.name,
+                contactPerson: sup.contact,
+                phone: sup.phone,
+                email: sup.email,
+                address: "Manila, Philippines",
+                isActive: true,
+                isArchived: false,
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp()
+            });
+            supplierMap[sup.name] = docRef.id;
+            console.log(`Created new supplier: ${sup.name} (ID: ${docRef.id})`);
+        }
+    }
+
+    // Helper to get the correct supplier name
+    function getSupplierInfo(itemName, catName) {
+        const name = (itemName || '').toLowerCase();
+        const cat = (catName || '').toLowerCase();
+        
+        if (name.includes('solo') || cat.includes('white')) {
+            return 'Boysen Paints Philippines';
+        } else if (name.includes('black') || name.includes('smoke') || name.includes('seal') || cat.includes('gray') || cat.includes('black')) {
+            return 'Davies Paints Philippines, Inc.';
+        } else if (name.includes('mocha') || name.includes('choco') || name.includes('sand') || cat.includes('brown')) {
+            return 'Nippon Paint Philippines';
+        } else if (name.includes('smiley') || name.includes('sun') || name.includes('calamansi') || cat.includes('yellow')) {
+            return 'Island Paints (Charter Chemical)';
+        } else {
+            return 'Universal Paint & Coatings';
+        }
+    }
+
     console.log("Adding Products...");
     for (const item of items) {
+        const supName = getSupplierInfo(item.name, item.cat);
+        const supId = supplierMap[supName] || '';
+
         // Create variations (Litre and Gallon) as separate products for the demo
         const base = {
             categoryId: catMap[item.cat],
             stock: 50,
             lowStockThreshold: 10,
             isActive: true,
+            supplierId: supId,
+            supplierName: supName,
             createdAt: serverTimestamp()
         };
 

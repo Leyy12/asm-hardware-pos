@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore'
-import { auth, db } from '../../firebase'
+// import { signInWithEmailAndPassword } from 'firebase/auth'
+// import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore'
+// import { auth, db } from '../../firebase'
 import { X, Lock, Mail, AlertCircle, Loader, Eye, EyeOff } from 'lucide-react'
+import { useAuth } from '../../context/AuthContext'
+import toast from 'react-hot-toast'
 
 export default function LoginModal({ isOpen, onClose, type }) {
     const [email, setEmail] = useState('')
@@ -11,6 +13,7 @@ export default function LoginModal({ isOpen, onClose, type }) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+    const { login } = useAuth()
 
     if (!isOpen) return null
 
@@ -20,44 +23,11 @@ export default function LoginModal({ isOpen, onClose, type }) {
         setLoading(true)
 
         try {
-            const userCred = await signInWithEmailAndPassword(auth, email, password)
-            let userDoc = await getDoc(doc(db, 'users', userCred.user.uid))
-            let data = userDoc.exists() ? userDoc.data() : null
-
-            // SELF-HEALING: If profile is missing, create it automatically based on the portal type
-            if (!userDoc.exists()) {
-                const newProfile = {
-                    name: type === 'admin' ? 'System Administrator' : 'Portal Cashier',
-                    email: email.toLowerCase(),
-                    role: type, // 'admin' or 'cashier' based on which button they clicked
-                    isActive: true,
-                    createdAt: serverTimestamp(),
-                    updatedAt: serverTimestamp()
-                }
-                await setDoc(doc(db, 'users', userCred.user.uid), newProfile)
-                data = newProfile
-                console.log("Profile auto-created for:", email)
-            }
-
-            if (!data.isActive) {
-                await auth.signOut()
-                throw new Error('Your account has been deactivated.')
-            }
-
-            // Check if trying to log into wrong portal (Double check for existing accounts)
-            if (data.role !== type) {
-                await auth.signOut()
-                throw new Error(`Access Denied: Please use the ${data.role === 'admin' ? 'Admin' : 'Cashier'} portal.`)
-            }
-
-            // If correct, AuthContext automatically updates and redirect component in Landing will catch it
+            await login(email, password, type)
+            toast.success('Login Successful!')
             onClose()
         } catch (err) {
-            if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-                setError('Invalid email or password.')
-            } else {
-                setError(err.message || 'Failed to sign in.')
-            }
+            setError(err.message || 'Failed to sign in.')
         } finally {
             setLoading(false)
         }
@@ -88,7 +58,7 @@ export default function LoginModal({ isOpen, onClose, type }) {
                                     <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.4rem', margin: 0, color: 'var(--text-primary)' }}>
                                         {type === 'admin' ? 'Admin Gateway' : 'Cashier Portal'}
                                     </h2>
-                                    <p style={{ color: 'rgba(15,23,42,0.6)', fontSize: '0.85rem', marginTop: 4 }}>Enter your credentials to access the system</p>
+                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: 4 }}>Enter your credentials to access the system</p>
                                 </div>
                             </div>
                             <button className="chat-icon-btn" onClick={onClose}><X size={20} /></button>
@@ -97,8 +67,9 @@ export default function LoginModal({ isOpen, onClose, type }) {
 
                     <form onSubmit={handleLogin} style={{ padding: '0 24px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
                         {error && (
-                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="form-error" style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(239,68,68,0.1)', color: 'var(--danger)', padding: 12, borderRadius: 8, fontSize: '0.85rem' }}>
-                                <AlertCircle size={16} /> {error}
+                            <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#fca5a5', padding: '12px 16px', borderRadius: 8, fontSize: '0.85rem', fontWeight: 600 }}>
+                                <AlertCircle size={18} style={{ minWidth: 18 }} /> 
+                                <span style={{ lineHeight: 1.4 }}>{error}</span>
                             </motion.div>
                         )}
 
@@ -137,7 +108,7 @@ export default function LoginModal({ isOpen, onClose, type }) {
                             </div>
                         </div>
 
-                        <button type="submit" className={`btn ${type === 'admin' ? 'btn-primary' : 'btn-success'}`} style={{ padding: 14, fontSize: '1rem' }} disabled={loading}>
+                        <button type="submit" className="btn btn-primary" style={{ padding: 14, fontSize: '1rem' }} disabled={loading}>
                             {loading ? <Loader className="spin" size={18} /> : 'Secure Login'}
                         </button>
                     </form>

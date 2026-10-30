@@ -35,6 +35,22 @@ export const generateTransactionId = () => {
     return `ASM-${y}${m}${d}-${rand}`
 }
 
+// Generates a unique 8-digit numeric barcode number (retail-style, e.g. "00134569")
+export const generateBarcodeNumber = () => {
+    const ts  = Date.now().toString().slice(-5)          // last 5 digits of timestamp
+    const rnd = Math.floor(Math.random() * 1000).toString().padStart(3, '0') // 3-digit random
+    return (ts + rnd).padStart(8, '0')                  // always 8 digits
+}
+
+export const generateExchangeReference = () => {
+    const now = new Date()
+    const y = now.getFullYear().toString().slice(-2)
+    const m = String(now.getMonth() + 1).padStart(2, '0')
+    const d = String(now.getDate()).padStart(2, '0')
+    const rand = Math.floor(Math.random() * 100000).toString().padStart(5, '0')
+    return `EX-${y}${m}${d}-${rand}`
+}
+
 export const exportToCSV = (data, filename) => {
     if (!data.length) return
     const headers = Object.keys(data[0])
@@ -56,10 +72,22 @@ export const exportToCSV = (data, filename) => {
     URL.revokeObjectURL(url)
 }
 
-export const getStockStatus = (stock, threshold) => {
-    if (stock <= 0) return { label: 'Out of Stock', variant: 'danger' }
-    if (stock <= threshold) return { label: 'Low Stock', variant: 'warning' }
-    return { label: 'In Stock', variant: 'success' }
+export const resolveLowStockThreshold = (threshold, defaultThreshold = 10) => {
+    if (threshold === '' || threshold === null || threshold === undefined) return defaultThreshold
+    const parsed = Number(threshold)
+    return Number.isFinite(parsed) ? parsed : defaultThreshold
+}
+
+export const isLowStock = (stock, threshold, defaultThreshold = 10) => {
+    const resolved = resolveLowStockThreshold(threshold, defaultThreshold)
+    return stock > 0 && stock <= resolved
+}
+
+export const getStockStatus = (stock, threshold, defaultThreshold = 10) => {
+    const resolved = resolveLowStockThreshold(threshold, defaultThreshold)
+    if (stock <= 0) return { label: 'OUT OF STOCK', variant: 'danger', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.12)' }
+    if (stock <= resolved) return { label: 'LOW STOCK', variant: 'warning', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.12)' }
+    return { label: 'OPTIMAL', variant: 'success', color: 'var(--success)', bg: 'rgba(16, 185, 129, 0.12)' }
 }
 
 export const truncate = (str, max = 40) =>

@@ -3,11 +3,13 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     LayoutDashboard, Package, ShoppingCart, RotateCcw,
-    BarChart3, Users, MessageSquareText, ChevronLeft,
-    ChevronRight, LogOut, Bell, Settings, Truck, Menu, X,
-    Download, CreditCard, Search, Handshake, User
+    BarChart3, ChevronLeft,
+    ChevronRight, LogOut, Settings, Menu, X,
+    CreditCard, Search, Handshake, User, Bot, Sparkles, Database
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import { onSnapshot, doc } from 'firebase/firestore'
+import { db } from '../../firebase'
 import ChatBot from '../chatbot/ChatBot'
 import '../../styles/layout.css'
 
@@ -15,15 +17,16 @@ const mainMenuItems = [
     { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/admin/inventory', icon: Package, label: 'Products' },
     { to: '/admin/monitoring', icon: Search, label: 'Inventory Monitoring' },
+    // { to: '/admin/catalog', icon: Database, label: 'DaaS Catalog' }, // Removed from customer navigation
     { to: '/admin/sales', icon: ShoppingCart, label: 'Cashier' },
     { to: '/admin/refunds', icon: RotateCcw, label: 'Refunds' },
     { to: '/admin/reports', icon: BarChart3, label: 'Sales & Reports' },
-    { to: '/admin/suppliers', icon: Handshake, label: 'Supplier Management' },
+    // { to: '/admin/suppliers', icon: Handshake, label: 'Supplier Management' },
 ]
 
 const managementItems = [
     { to: '/admin/users', icon: User, label: 'Users' },
-    { to: '/admin/discount-cards', icon: CreditCard, label: 'Discount Cards' },
+    // { to: '/admin/discount-cards', icon: CreditCard, label: 'Reward Cards' },
     { to: '/admin/settings', icon: Settings, label: 'Settings' },
 ]
 
@@ -32,9 +35,22 @@ export default function AdminLayout({ children }) {
     const [mobileOpen, setMobileOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
     const [chatOpen, setChatOpen] = useState(false)
+    const [adminName, setAdminName] = useState('Administrator')
     const { userProfile, logout } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
+
+    // Sync admin name from Firestore settings in real-time
+    useEffect(() => {
+        const unsub = onSnapshot(doc(db, 'settings', 'system'), (snap) => {
+            if (snap.exists() && snap.data().adminName?.trim()) {
+                setAdminName(snap.data().adminName.trim())
+            } else if (userProfile?.name) {
+                setAdminName(userProfile.name)
+            }
+        })
+        return unsub
+    }, [userProfile])
 
     // Detect mobile viewport
     useEffect(() => {
@@ -45,9 +61,11 @@ export default function AdminLayout({ children }) {
     }, [])
 
     // Close drawer on route change (mobile)
-    useEffect(() => {
+    const [prevPath, setPrevPath] = useState(location.pathname)
+    if (location.pathname !== prevPath) {
+        setPrevPath(location.pathname)
         if (isMobile) setMobileOpen(false)
-    }, [location.pathname, isMobile])
+    }
 
     // Prevent body scroll when drawer is open on mobile
     useEffect(() => {
@@ -175,24 +193,16 @@ export default function AdminLayout({ children }) {
                     </button>
                 </nav>
 
-                {/* User info */}
-                <div className="sidebar-user">
-                    <div className="user-avatar">
-                        {userProfile?.name?.charAt(0) || 'A'}
-                    </div>
-                    <AnimatePresence>
-                        {showLabels && (
-                            <motion.div className="user-info" initial={{ opacity: 0, width: 0 }} animate={{ opacity: 1, width: 'auto' }} exit={{ opacity: 0, width: 0 }} transition={{ duration: 0.2 }}>
-                                <span className="user-name">{userProfile?.name || 'Admin'}</span>
-                                <span className="user-role">Admin</span>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
             </motion.aside>
 
             {/* ---- Main ---- */}
-            <div className="layout-main">
+            <div
+                className="layout-main"
+                style={!isMobile ? {
+                    marginLeft: collapsed ? 'var(--sidebar-collapsed)' : 'var(--sidebar-w)',
+                    transition: 'margin-left 0.25s ease',
+                } : {}}
+            >
                 {/* Top bar */}
                 <header className="topbar">
                     <div className="topbar-left">
@@ -204,18 +214,16 @@ export default function AdminLayout({ children }) {
                         >
                             <Menu size={20} />
                         </button>
-                        <button className="btn btn-secondary btn-sm" style={{ padding: '8px 16px', borderRadius: '12px' }}>
-                            <Download size={16} /> <span className="topbar-export-label">Export</span>
-                        </button>
                     </div>
-                    <div className="topbar-right">
-                        <Bell size={20} className="topbar-icon" />
-                        <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 8px' }} />
-                        <span className="topbar-greeting">Welcome, <strong>{userProfile?.name || 'Admin'}</strong></span>
-                        <div className="user-avatar" style={{ width: 32, height: 32, fontSize: '0.8rem' }}>
-                            {userProfile?.name?.charAt(0) || 'A'}
+                    {location.pathname === '/admin/dashboard' && (
+                        <div className="topbar-right">
+                            <span className="topbar-greeting">Welcome, Admin <strong>{adminName}</strong></span>
+                            <div style={{ width: 1, height: 24, background: 'var(--border)', margin: '0 8px' }} />
+                            <div className="user-avatar" style={{ width: 32, height: 32, fontSize: '0.8rem' }}>
+                                {adminName.charAt(0).toUpperCase()}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </header>
 
                 {/* Content */}
@@ -230,6 +238,44 @@ export default function AdminLayout({ children }) {
                     </motion.div>
                 </main>
             </div>
+
+            {/* Floating AI Assistant Launcher */}
+            <AnimatePresence>
+                {!chatOpen && (
+                    <motion.button 
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0, opacity: 0 }}
+                        onClick={() => setChatOpen(true)}
+                        style={{
+                            position: 'fixed',
+                            bottom: 32,
+                            right: 32,
+                            width: 60,
+                            height: 60,
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)',
+                            border: 'none',
+                            color: 'white',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            boxShadow: '0 8px 24px rgba(29, 78, 216, 0.4)',
+                            zIndex: 9999,
+                            transition: 'transform 0.2s',
+                        }}
+                        whileHover={{ scale: 1.05, translateY: -2, boxShadow: '0 12px 28px rgba(29, 78, 216, 0.6)' }}
+                        whileTap={{ scale: 0.95 }}
+                        title="Open AI Assistant"
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                            <Bot size={28} strokeWidth={1.5} />
+                            <Sparkles size={16} strokeWidth={2} style={{ position: 'absolute', top: -6, right: -10, color: '#ffffff', filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.6))' }} />
+                        </div>
+                    </motion.button>
+                )}
+            </AnimatePresence>
 
             {/* Chatbot panel */}
             <ChatBot isOpen={chatOpen} onClose={() => setChatOpen(false)} />

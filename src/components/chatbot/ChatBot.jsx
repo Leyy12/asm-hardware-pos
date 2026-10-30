@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Bot, User, Loader2, Sparkles, Trash2 } from 'lucide-react'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../../firebase'
+// import { collection, getDocs } from 'firebase/firestore'
+// import { db } from '../../firebase'
 import { formatCurrency } from '../../utils/helpers'
 import '../../styles/chatbot.css'
 
@@ -52,11 +52,12 @@ export default function ChatBot({ isOpen, onClose }) {
         setLoading(true)
 
         try {
-            // Fetch live inventory snapshot
-            const snap = await getDocs(collection(db, 'products'))
-            const products = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+            // Fetch live inventory snapshot - MOCKED
+            // const snap = await getDocs(collection(db, 'products'))
+            // const products = snap.docs.map(d => ({ id: d.id, ...d.data() }))
 
-            // Construct API Call to Nvidia NIM
+            // Construct API Call to Nvidia NIM - MOCKED
+            /*
             const chatHistory = messages.filter(m => m.id !== 1).map(m => ({
                 role: m.role,
                 content: m.content
@@ -83,6 +84,23 @@ export default function ChatBot({ isOpen, onClose }) {
             if (!response.ok) throw new Error("API Error")
             const data = await response.json()
             const text = data.choices[0].message.content
+            */
+
+            // SIMULATED MOCK RESPONSE
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate delay
+            
+            const lowerInput = input.toLowerCase();
+            let text = "I am currently running in offline/mock mode for presentation. I cannot access live real-time data from Firestore or the NVIDIA AI.";
+            
+            if (lowerInput.includes("stock") || lowerInput.includes("inventory") || lowerInput.includes("how many")) {
+                text = "Based on our simulated data: We have 150 bags of Portland Cement, but we are running low on Boysen Paint (12 gals left) and completely out of stock for Plywood 1/4. Would you like me to draft a restock order?";
+            } else if (lowerInput.includes("price") || lowerInput.includes("cost") || lowerInput.includes("much")) {
+                text = "Mock pricing details: Portland Cement is ₱250.00 per bag, and Boysen Paint is ₱650.00 per gal.";
+            } else if (lowerInput.includes("hello") || lowerInput.includes("hi")) {
+                text = "Hello there! How can I help you with your ASM Hardware inventory today? (Note: I am in mock mode)";
+            } else {
+                text = "This is a simulated AI response. The system is currently disconnected from external databases and external AI services for demonstration purposes.";
+            }
 
             setMessages(prev => [
                 ...prev,
@@ -94,7 +112,7 @@ export default function ChatBot({ isOpen, onClose }) {
                 {
                     id: Date.now() + 1,
                     role: 'assistant',
-                    content: '⚠️ I couldn\'t connect to the AI backend. Please check your NVIDIA API key in `.env`.'
+                    content: '⚠️ I couldn\'t process that request in offline mode.'
                 }
             ])
         } finally {

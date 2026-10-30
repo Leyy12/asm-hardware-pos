@@ -1,0 +1,3079 @@
+{
+  "products": [
+    {
+      "id": "08UjH9kKDyQZE7eWOtVF",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854655,
+        "nanoseconds": 239000000,
+        "_isTimestamp": true
+      },
+      "price": 565,
+      "unit": "gal",
+      "categoryId": "kHXjXHbOkHldfCBjzQMQ",
+      "barcodeNumber": "29016403",
+      "sku": "SOL-GAL",
+      "name": "SOLO GLOSS LATEX WHITE (Gallon)",
+      "stock": 47,
+      "isActive": true
+    },
+    {
+      "id": "0XTOWSRGhQGfyEquQRWU",
+      "stock": 47,
+      "isActive": true,
+      "sku": "BLA-GAL",
+      "name": "BLACK (Gallon)",
+      "categoryId": "vhdRdiBpDqnyyAU9zHCI",
+      "unit": "gal",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854652,
+        "nanoseconds": 890000000,
+        "_isTimestamp": true
+      },
+      "price": 800
+    },
+    {
+      "id": "0cWcTqmpIiqUAACXNmqS",
+      "imageUrl": "/products/paint-white.png",
+      "isArchived": false,
+      "unit": "bottle",
+      "isActive": true,
+      "stock": 0,
+      "updatedAt": {
+        "seconds": 1778993081,
+        "nanoseconds": 567000000,
+        "_isTimestamp": true
+      },
+      "name": "MOCHA BLANCH (1L) Finish Paint",
+      "barcodeNumber": "42087614",
+      "categoryId": "vQEIYaJlF0Z8kaC4kehq",
+      "price": 220,
+      "createdAt": {
+        "seconds": 1777100773,
+        "nanoseconds": 137000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "sku": "MOC-1L"
+    },
+    {
+      "id": "0tGBAem7wQBQxHT3bHSn",
+      "sku": "MAL-1L",
+      "barcodeNumber": "51799184",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "createdAt": {
+        "seconds": 1777100754,
+        "nanoseconds": 356000000,
+        "_isTimestamp": true
+      },
+      "price": 225,
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 2,
+      "name": "MALE SUN GOLD (1L) Finish Paint",
+      "updatedAt": {
+        "seconds": 1779537448,
+        "nanoseconds": 491000000,
+        "_isTimestamp": true
+      },
+      "unit": "bottle",
+      "isArchived": false,
+      "imageUrl": "/products/paint-yellow.png"
+    },
+    {
+      "id": "2JfoZ32G1dx2u8pnItom",
+      "sku": "CHO-GAL",
+      "name": "CHOCO BROWN (Gallon) Finish Paint",
+      "updatedAt": {
+        "seconds": 1779432041,
+        "nanoseconds": 671000000,
+        "_isTimestamp": true
+      },
+      "stock": 48,
+      "isActive": true,
+      "lowStockThreshold": 10,
+      "price": 810,
+      "createdAt": {
+        "seconds": 1777100779,
+        "nanoseconds": 708000000,
+        "_isTimestamp": true
+      },
+      "imageUrl": "/products/paint-gray.png",
+      "categoryId": "vQEIYaJlF0Z8kaC4kehq",
+      "unit": "gal",
+      "barcodeNumber": "68625452"
+    },
+    {
+      "id": "3FXv1gGranwtUsWRM0uU",
+      "unit": "bottle",
+      "categoryId": "lL19PPo5g5m3QsvbigpA",
+      "price": 220,
+      "createdAt": {
+        "seconds": 1779854654,
+        "nanoseconds": 351000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 48,
+      "name": "CHOCO BROWN (1L)",
+      "sku": "CHO-1L"
+    },
+    {
+      "id": "3c9mS3d8tfHhp3Sucwis",
+      "stock": 47,
+      "isActive": true,
+      "sku": "SMO-1L",
+      "updatedAt": {
+        "seconds": 1779438813,
+        "nanoseconds": 845000000,
+        "_isTimestamp": true
+      },
+      "name": "SMOKE GRAY (1L) Finish Paint",
+      "unit": "bottle",
+      "categoryId": "OImFq3RtBApfzp7Z26pM",
+      "imageUrl": "/products/paint-gray.png",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1777100763,
+        "nanoseconds": 66000000,
+        "_isTimestamp": true
+      },
+      "price": 225
+    },
+    {
+      "id": "445ByxbqOdwe5S6KWSEV",
+      "imageUrl": "/products/paint-white.png",
+      "unit": "gal",
+      "categoryId": "vQEIYaJlF0Z8kaC4kehq",
+      "lowStockThreshold": 10,
+      "price": 810,
+      "createdAt": {
+        "seconds": 1777100775,
+        "nanoseconds": 19000000,
+        "_isTimestamp": true
+      },
+      "stock": 49,
+      "isActive": true,
+      "sku": "MOC-GAL",
+      "name": "MOCHA BLANCH (Gallon) Finish Paint",
+      "updatedAt": {
+        "seconds": 1779538818,
+        "nanoseconds": 394000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "4JbghSPMj6a0905IiHpU",
+      "barcodeNumber": "83043859",
+      "imageUrl": "/products/paint-gray.png",
+      "unit": "gal",
+      "categoryId": "OImFq3RtBApfzp7Z26pM",
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100765,
+        "nanoseconds": 456000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 42,
+      "name": "SEAL GRAY (Gallon) Finish Paint",
+      "updatedAt": {
+        "seconds": 1779541175,
+        "nanoseconds": 629000000,
+        "_isTimestamp": true
+      },
+      "sku": "SEA-GAL"
+    },
+    {
+      "id": "4WpyTD5IGnGH8VXI2U9E",
+      "isActive": true,
+      "stock": 43,
+      "name": "SAND BEIGE (Gallon) Finish Paint",
+      "sku": "SAN-GAL",
+      "unit": "gal",
+      "categoryId": "vQEIYaJlF0Z8kaC4kehq",
+      "price": 810,
+      "createdAt": {
+        "seconds": 1777100771,
+        "nanoseconds": 830000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10
+    },
+    {
+      "id": "4odl74T0aTRGwFUnSlV0",
+      "createdAt": {
+        "seconds": 1777100757,
+        "nanoseconds": 567000000,
+        "_isTimestamp": true
+      },
+      "price": 225,
+      "lowStockThreshold": 10,
+      "unit": "bottle",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "updatedAt": {
+        "seconds": 1779533031,
+        "nanoseconds": 648000000,
+        "_isTimestamp": true
+      },
+      "name": "CROWN SUNRISE (1L) Finish Paint",
+      "sku": "CRO-1L",
+      "isActive": true,
+      "stock": 46
+    },
+    {
+      "id": "5MOFwEswAy8w7P8IXt04",
+      "stock": 47,
+      "isActive": true,
+      "sku": "CAL-1L",
+      "name": "CALAMANSI (1L)",
+      "unit": "bottle",
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854649,
+        "nanoseconds": 403000000,
+        "_isTimestamp": true
+      },
+      "price": 225
+    },
+    {
+      "id": "6hVDubYsJt3UsdpK4XYo",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1777100766,
+        "nanoseconds": 682000000,
+        "_isTimestamp": true
+      },
+      "price": 220,
+      "unit": "bottle",
+      "categoryId": "OImFq3RtBApfzp7Z26pM",
+      "imageUrl": "/products/paint-gray.png",
+      "sku": "BLA-1L",
+      "name": "BLACK (1L) Finish Paint",
+      "stock": 46,
+      "isActive": true
+    },
+    {
+      "id": "94XUAClwEOo59oOE922T",
+      "unit": "bottle",
+      "categoryId": "vhdRdiBpDqnyyAU9zHCI",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854651,
+        "nanoseconds": 235000000,
+        "_isTimestamp": true
+      },
+      "price": 225,
+      "stock": 47,
+      "isActive": true,
+      "sku": "SMO-1L",
+      "name": "SMOKE GRAY (1L)"
+    },
+    {
+      "id": "AriJJTAP3ezd8jVgTu7i",
+      "lowStockThreshold": 10,
+      "price": 1925,
+      "createdAt": {
+        "seconds": 1779854650,
+        "nanoseconds": 922000000,
+        "_isTimestamp": true
+      },
+      "unit": "gal",
+      "categoryId": "VOenoAFlb5troK9cV2IK",
+      "sku": "JOL-GAL",
+      "name": "JOLLY ORANGE (Gallon)",
+      "stock": 45,
+      "isActive": true
+    },
+    {
+      "id": "BLsmZfyHZ5ylytQTJa0H",
+      "price": 810,
+      "createdAt": {
+        "seconds": 1779854653,
+        "nanoseconds": 475000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "unit": "gal",
+      "categoryId": "lL19PPo5g5m3QsvbigpA",
+      "name": "SAND BEIGE (Gallon)",
+      "sku": "SAN-GAL",
+      "isActive": true,
+      "stock": 47
+    },
+    {
+      "id": "Cqs78h1VikveM6FzPIv2",
+      "unit": "gal",
+      "categoryId": "kHXjXHbOkHldfCBjzQMQ",
+      "price": 405,
+      "createdAt": {
+        "seconds": 1779854654,
+        "nanoseconds": 923000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 49,
+      "name": "SOLO FLAT LATEX WHITE (Gallon)",
+      "sku": "SOL-GAL"
+    },
+    {
+      "id": "FHbLKLOhyDVsob4v79Tm",
+      "createdAt": {
+        "seconds": 1779854650,
+        "nanoseconds": 31000000,
+        "_isTimestamp": true
+      },
+      "price": 225,
+      "lowStockThreshold": 10,
+      "unit": "bottle",
+      "categoryId": "VOenoAFlb5troK9cV2IK",
+      "name": "PEACH (1L)",
+      "sku": "PEA-1L",
+      "isActive": true,
+      "stock": 47
+    },
+    {
+      "id": "GMSLoJWjJh5NdvBz5Hai",
+      "stock": 48,
+      "isActive": true,
+      "sku": "CRO-GAL",
+      "name": "CROWN SUNRISE (Gallon) Finish Paint",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "unit": "gal",
+      "lowStockThreshold": 10,
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100758,
+        "nanoseconds": 119000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "H1c9lVVbdqb2VxzlMX4m",
+      "imageUrl": "/products/paint-yellow.png",
+      "unit": "bottle",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "price": 225,
+      "createdAt": {
+        "seconds": 1777100758,
+        "nanoseconds": 657000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 45,
+      "name": "CHEESE YELLOW (1L) Finish Paint",
+      "sku": "CHE-1L"
+    },
+    {
+      "id": "IYwDLLOe1MuTRUbIgyuL",
+      "isActive": true,
+      "stock": 47,
+      "name": "PEACH (1L) Finish Paint",
+      "sku": "PEA-1L",
+      "imageUrl": "/products/paint-yellow.png",
+      "unit": "bottle",
+      "categoryId": "ayTh520PcZ5YflJvKpuC",
+      "price": 225,
+      "createdAt": {
+        "seconds": 1777100760,
+        "nanoseconds": 654000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10
+    },
+    {
+      "id": "J3mxr5rpOgiRfim3uroi",
+      "unit": "bottle",
+      "categoryId": "OImFq3RtBApfzp7Z26pM",
+      "imageUrl": "/products/paint-gray.png",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1777100764,
+        "nanoseconds": 558000000,
+        "_isTimestamp": true
+      },
+      "price": 220,
+      "stock": 49,
+      "isActive": true,
+      "sku": "SEA-1L",
+      "name": "SEAL GRAY (1L) Finish Paint"
+    },
+    {
+      "id": "JMhjO7ZJPMCxF8s9R6R1",
+      "isActive": true,
+      "stock": 50,
+      "name": "SEAL GRAY (1L)",
+      "sku": "SEA-1L",
+      "unit": "bottle",
+      "categoryId": "vhdRdiBpDqnyyAU9zHCI",
+      "price": 220,
+      "createdAt": {
+        "seconds": 1779854651,
+        "nanoseconds": 988000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10
+    },
+    {
+      "id": "Jtv0viZ7wbk8e5LMk5gJ",
+      "stock": 46,
+      "isActive": true,
+      "sku": "SMI-1L",
+      "name": "SMILEY YELLOW (1L) Finish Paint",
+      "imageUrl": "/products/paint-yellow.png",
+      "unit": "bottle",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "lowStockThreshold": 10,
+      "price": 225,
+      "createdAt": {
+        "seconds": 1777100755,
+        "nanoseconds": 950000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "L3uLDLpNa7cRkEJZXd0F",
+      "price": 800,
+      "createdAt": {
+        "seconds": 1779854649,
+        "nanoseconds": 707000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "unit": "gal",
+      "name": "CALAMANSI (Gallon)",
+      "sku": "CAL-GAL",
+      "isActive": true,
+      "stock": 47
+    },
+    {
+      "id": "N5nPfysTs0dgfB84mvnX",
+      "isActive": true,
+      "stock": 47,
+      "name": "SAND BEIGE (1L)",
+      "sku": "SAN-1L",
+      "unit": "bottle",
+      "categoryId": "lL19PPo5g5m3QsvbigpA",
+      "createdAt": {
+        "seconds": 1779854653,
+        "nanoseconds": 194000000,
+        "_isTimestamp": true
+      },
+      "price": 220,
+      "lowStockThreshold": 10
+    },
+    {
+      "id": "Nq71SJPIoH8s402LHkxq",
+      "sku": "SMI-GAL",
+      "name": "SMILEY YELLOW (Gallon)",
+      "stock": 49,
+      "isActive": true,
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854647,
+        "nanoseconds": 850000000,
+        "_isTimestamp": true
+      },
+      "price": 800,
+      "unit": "gal",
+      "categoryId": "lSCya3opwwMVigxsx85p"
+    },
+    {
+      "id": "QR8Kkbw4UPfz6hfdreuD",
+      "unit": "gal",
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "lowStockThreshold": 10,
+      "price": 800,
+      "createdAt": {
+        "seconds": 1779854647,
+        "nanoseconds": 190000000,
+        "_isTimestamp": true
+      },
+      "stock": 45,
+      "isActive": true,
+      "sku": "MAL-GAL",
+      "name": "MALE SUN GOLD (Gallon)"
+    },
+    {
+      "id": "ROnB1qAjCa5unurFy6OG",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1777100777,
+        "nanoseconds": 415000000,
+        "_isTimestamp": true
+      },
+      "price": 220,
+      "categoryId": "vQEIYaJlF0Z8kaC4kehq",
+      "unit": "bottle",
+      "imageUrl": "/products/paint-gray.png",
+      "sku": "CHO-1L",
+      "name": "CHOCO BROWN (1L) Finish Paint",
+      "stock": 48,
+      "isActive": true
+    },
+    {
+      "id": "RmyJH0awGpmbCukHB7fa",
+      "categoryId": "C1woXJqDlzEmDsHZIg15",
+      "unit": "gal",
+      "imageUrl": "/products/paint-white.png",
+      "createdAt": {
+        "seconds": 1777100781,
+        "nanoseconds": 947000000,
+        "_isTimestamp": true
+      },
+      "price": 405,
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 49,
+      "name": "SOLO FLAT LATEX WHITE (Gallon)",
+      "sku": "SOL-GAL"
+    },
+    {
+      "id": "S8XS6oSFxSF7nwRV4kPR",
+      "lowStockThreshold": 10,
+      "price": 565,
+      "createdAt": {
+        "seconds": 1777100784,
+        "nanoseconds": 387000000,
+        "_isTimestamp": true
+      },
+      "imageUrl": "/products/paint-white.png",
+      "unit": "gal",
+      "categoryId": "C1woXJqDlzEmDsHZIg15",
+      "sku": "SOL-GAL",
+      "name": "SOLO GLOSS LATEX WHITE (Gallon)",
+      "stock": 49,
+      "isActive": true
+    },
+    {
+      "id": "SagTl7FbiTBVh5fKPsrv",
+      "lowStockThreshold": 10,
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100755,
+        "nanoseconds": 166000000,
+        "_isTimestamp": true
+      },
+      "imageUrl": "/products/paint-yellow.png",
+      "unit": "gal",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "sku": "MAL-GAL",
+      "name": "MALE SUN GOLD (Gallon) Finish Paint",
+      "stock": 47,
+      "isActive": true
+    },
+    {
+      "id": "SfLHsr8CfoBAqGG9hoVS",
+      "imageUrl": "/products/paint-gray.png",
+      "unit": "gal",
+      "categoryId": "OImFq3RtBApfzp7Z26pM",
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100763,
+        "nanoseconds": 577000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 48,
+      "name": "SMOKE GRAY (Gallon) Finish Paint",
+      "sku": "SMO-GAL"
+    },
+    {
+      "id": "T0745CWiqhLtkqZJ9geU",
+      "isActive": true,
+      "stock": 50,
+      "name": "PEACH (Gallon) Finish Paint",
+      "sku": "PEA-GAL",
+      "imageUrl": "/products/paint-yellow.png",
+      "unit": "gal",
+      "categoryId": "ayTh520PcZ5YflJvKpuC",
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100761,
+        "nanoseconds": 200000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10
+    },
+    {
+      "id": "Wmm42KOwMRBDmJZJgdtI",
+      "lowStockThreshold": 10,
+      "price": 810,
+      "createdAt": {
+        "seconds": 1779854654,
+        "nanoseconds": 75000000,
+        "_isTimestamp": true
+      },
+      "unit": "gal",
+      "categoryId": "lL19PPo5g5m3QsvbigpA",
+      "sku": "MOC-GAL",
+      "name": "MOCHA BLANCH (Gallon)",
+      "stock": 50,
+      "isActive": true
+    },
+    {
+      "id": "ZdboYqprlvcd6IFjwSD2",
+      "unit": "gal",
+      "categoryId": "lL19PPo5g5m3QsvbigpA",
+      "createdAt": {
+        "seconds": 1779854654,
+        "nanoseconds": 646000000,
+        "_isTimestamp": true
+      },
+      "price": 810,
+      "lowStockThreshold": 10,
+      "isActive": true,
+      "stock": 50,
+      "name": "CHOCO BROWN (Gallon)",
+      "sku": "CHO-GAL"
+    },
+    {
+      "id": "a76H8JCcRwFYiLeJMH9H",
+      "price": 225,
+      "createdAt": {
+        "seconds": 1779854648,
+        "nanoseconds": 154000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "unit": "bottle",
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "name": "CROWN SUNRISE (1L)",
+      "sku": "CRO-1L",
+      "isActive": true,
+      "stock": 48
+    },
+    {
+      "id": "bZ5nBJXd4Q8RvVz0jKoW",
+      "createdAt": {
+        "seconds": 1779854647,
+        "nanoseconds": 527000000,
+        "_isTimestamp": true
+      },
+      "price": 225,
+      "lowStockThreshold": 10,
+      "unit": "bottle",
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "name": "SMILEY YELLOW (1L)",
+      "sku": "SMI-1L",
+      "isActive": true,
+      "stock": 50
+    },
+    {
+      "id": "d4V51kQVTPNpfCqiB3fR",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854650,
+        "nanoseconds": 343000000,
+        "_isTimestamp": true
+      },
+      "price": 800,
+      "unit": "gal",
+      "categoryId": "VOenoAFlb5troK9cV2IK",
+      "sku": "PEA-GAL",
+      "name": "PEACH (Gallon)",
+      "stock": 50,
+      "isActive": true
+    },
+    {
+      "id": "dVtd5yZdaBXOoamBg1gJ",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854648,
+        "nanoseconds": 475000000,
+        "_isTimestamp": true
+      },
+      "price": 800,
+      "unit": "gal",
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "sku": "CRO-GAL",
+      "name": "CROWN SUNRISE (Gallon)",
+      "stock": 50,
+      "isActive": true
+    },
+    {
+      "id": "ev7eUWHDYouj7b8nvFXX",
+      "stock": 47,
+      "isActive": true,
+      "sku": "BLA-GAL",
+      "name": "BLACK (Gallon) Finish Paint",
+      "categoryId": "OImFq3RtBApfzp7Z26pM",
+      "unit": "gal",
+      "imageUrl": "/products/paint-gray.png",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1777100768,
+        "nanoseconds": 30000000,
+        "_isTimestamp": true
+      },
+      "price": 800
+    },
+    {
+      "id": "gQ1E7obkVKzHBrtdR7lf",
+      "isActive": true,
+      "stock": 50,
+      "name": "SMILEY YELLOW (Gallon) Finish Paint",
+      "sku": "SMI-GAL",
+      "imageUrl": "/products/paint-yellow.png",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "unit": "gal",
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100756,
+        "nanoseconds": 871000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10
+    },
+    {
+      "id": "h1Is257oTjtKXLPFi4rY",
+      "name": "SEAL GRAY (Gallon)",
+      "sku": "SEA-GAL",
+      "isActive": true,
+      "stock": 50,
+      "price": 800,
+      "createdAt": {
+        "seconds": 1779854652,
+        "nanoseconds": 286000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "unit": "gal",
+      "categoryId": "vhdRdiBpDqnyyAU9zHCI"
+    },
+    {
+      "id": "kQxslEdkftymkBeUJXHA",
+      "sku": "SMO-GAL",
+      "name": "SMOKE GRAY (Gallon)",
+      "stock": 48,
+      "isActive": true,
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854651,
+        "nanoseconds": 666000000,
+        "_isTimestamp": true
+      },
+      "price": 800,
+      "unit": "gal",
+      "categoryId": "vhdRdiBpDqnyyAU9zHCI"
+    },
+    {
+      "id": "nEKNXJ5k2Td7Q0sij04z",
+      "price": 1925,
+      "createdAt": {
+        "seconds": 1777100762,
+        "nanoseconds": 623000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "imageUrl": "/products/paint-yellow.png",
+      "categoryId": "ayTh520PcZ5YflJvKpuC",
+      "unit": "gal",
+      "name": "JOLLY ORANGE (Gallon) Finish Paint",
+      "sku": "JOL-GAL",
+      "isActive": true,
+      "stock": 49
+    },
+    {
+      "id": "pXZ5Zuk2Ir8FBCYdrAqp",
+      "name": "BLACK (1L)",
+      "sku": "BLA-1L",
+      "isActive": true,
+      "stock": 50,
+      "price": 220,
+      "createdAt": {
+        "seconds": 1779854652,
+        "nanoseconds": 586000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "unit": "bottle",
+      "categoryId": "vhdRdiBpDqnyyAU9zHCI"
+    },
+    {
+      "id": "rE7hfsItBbeYpwkWpVP9",
+      "createdAt": {
+        "seconds": 1777100761,
+        "nanoseconds": 938000000,
+        "_isTimestamp": true
+      },
+      "price": 495,
+      "lowStockThreshold": 10,
+      "unit": "bottle",
+      "categoryId": "ayTh520PcZ5YflJvKpuC",
+      "imageUrl": "/products/paint-yellow.png",
+      "name": "JOLLY ORANGE (1L) Finish Paint",
+      "sku": "JOL-1L",
+      "isActive": true,
+      "stock": 50
+    },
+    {
+      "id": "rYPv1dSQwmQ7EUmJOGNA",
+      "name": "CALAMANSI (Gallon) Finish Paint",
+      "sku": "CAL-GAL",
+      "isActive": true,
+      "stock": 50,
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100760,
+        "nanoseconds": 126000000,
+        "_isTimestamp": true
+      },
+      "lowStockThreshold": 10,
+      "imageUrl": "/products/paint-yellow.png",
+      "unit": "gal",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn"
+    },
+    {
+      "id": "riMkhRPC86jSYSP3ferm",
+      "unit": "bottle",
+      "categoryId": "lL19PPo5g5m3QsvbigpA",
+      "lowStockThreshold": 10,
+      "price": 220,
+      "createdAt": {
+        "seconds": 1779854653,
+        "nanoseconds": 778000000,
+        "_isTimestamp": true
+      },
+      "stock": 47,
+      "isActive": true,
+      "sku": "MOC-1L",
+      "name": "MOCHA BLANCH (1L)"
+    },
+    {
+      "id": "v2LwlboWo9KC6ipeyFy6",
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "unit": "bottle",
+      "lowStockThreshold": 10,
+      "price": 225,
+      "createdAt": {
+        "seconds": 1779854648,
+        "nanoseconds": 791000000,
+        "_isTimestamp": true
+      },
+      "stock": 50,
+      "isActive": true,
+      "sku": "CHE-1L",
+      "name": "CHEESE YELLOW (1L)"
+    },
+    {
+      "id": "w0UWMtK5cHkUd50v69Mj",
+      "name": "MALE SUN GOLD (1L)",
+      "sku": "MAL-1L",
+      "isActive": true,
+      "stock": 45,
+      "createdAt": {
+        "seconds": 1779854646,
+        "nanoseconds": 238000000,
+        "_isTimestamp": true
+      },
+      "price": 225,
+      "lowStockThreshold": 10,
+      "unit": "bottle",
+      "categoryId": "lSCya3opwwMVigxsx85p"
+    },
+    {
+      "id": "wTTv7fM51EmFePMs7V5d",
+      "isActive": true,
+      "stock": 50,
+      "name": "CALAMANSI (1L) Finish Paint",
+      "sku": "CAL-1L",
+      "unit": "bottle",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "imageUrl": "/products/paint-yellow.png",
+      "createdAt": {
+        "seconds": 1777100759,
+        "nanoseconds": 589000000,
+        "_isTimestamp": true
+      },
+      "price": 225,
+      "lowStockThreshold": 10
+    },
+    {
+      "id": "weypOQp578F98DObKWiK",
+      "stock": 46,
+      "isActive": true,
+      "sku": "CHE-GAL",
+      "name": "CHEESE YELLOW (Gallon) Finish Paint",
+      "imageUrl": "/products/paint-yellow.png",
+      "unit": "gal",
+      "categoryId": "R3G44WoNHKE3q0ImXWqn",
+      "lowStockThreshold": 10,
+      "price": 800,
+      "createdAt": {
+        "seconds": 1777100759,
+        "nanoseconds": 206000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "yTtcKFXpRj5JGGha1MbQ",
+      "stock": 48,
+      "isActive": true,
+      "sku": "CHE-GAL",
+      "name": "CHEESE YELLOW (Gallon)",
+      "categoryId": "lSCya3opwwMVigxsx85p",
+      "unit": "gal",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854649,
+        "nanoseconds": 98000000,
+        "_isTimestamp": true
+      },
+      "price": 800
+    },
+    {
+      "id": "zijlVWrTrWo0d4hV58PF",
+      "unit": "bottle",
+      "categoryId": "VOenoAFlb5troK9cV2IK",
+      "lowStockThreshold": 10,
+      "createdAt": {
+        "seconds": 1779854650,
+        "nanoseconds": 623000000,
+        "_isTimestamp": true
+      },
+      "price": 495,
+      "stock": 47,
+      "isActive": true,
+      "sku": "JOL-1L",
+      "name": "JOLLY ORANGE (1L)"
+    }
+  ],
+  "categories": [
+    {
+      "id": "C1woXJqDlzEmDsHZIg15",
+      "name": "Whites",
+      "createdAt": {
+        "seconds": 1777100753,
+        "nanoseconds": 524000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "OImFq3RtBApfzp7Z26pM",
+      "name": "Grays & Blacks",
+      "createdAt": {
+        "seconds": 1777100751,
+        "nanoseconds": 608000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "R3G44WoNHKE3q0ImXWqn",
+      "name": "Yellows",
+      "createdAt": {
+        "seconds": 1777100750,
+        "nanoseconds": 409000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "VOenoAFlb5troK9cV2IK",
+      "name": "Oranges",
+      "createdAt": {
+        "seconds": 1779854644,
+        "nanoseconds": 632000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "ayTh520PcZ5YflJvKpuC",
+      "name": "Oranges",
+      "createdAt": {
+        "seconds": 1777100751,
+        "nanoseconds": 7000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "kHXjXHbOkHldfCBjzQMQ",
+      "name": "Whites",
+      "createdAt": {
+        "seconds": 1779854645,
+        "nanoseconds": 903000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "lL19PPo5g5m3QsvbigpA",
+      "name": "Browns",
+      "createdAt": {
+        "seconds": 1779854645,
+        "nanoseconds": 590000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "lSCya3opwwMVigxsx85p",
+      "name": "Yellows",
+      "createdAt": {
+        "seconds": 1779854644,
+        "nanoseconds": 301000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "vQEIYaJlF0Z8kaC4kehq",
+      "name": "Browns",
+      "createdAt": {
+        "seconds": 1777100752,
+        "nanoseconds": 691000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "vhdRdiBpDqnyyAU9zHCI",
+      "name": "Grays & Blacks",
+      "createdAt": {
+        "seconds": 1779854645,
+        "nanoseconds": 175000000,
+        "_isTimestamp": true
+      }
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "43W4Tjdrpq6CkOHeJ77d",
+      "name": "XYZ Hardware & General Merchandise",
+      "updatedAt": {
+        "seconds": 1779854626,
+        "nanoseconds": 29000000,
+        "_isTimestamp": true
+      },
+      "createdAt": {
+        "seconds": 1779854626,
+        "nanoseconds": 29000000,
+        "_isTimestamp": true
+      },
+      "address": "Poblacion, Abra de Ilog, Occidental Mindoro",
+      "email": "xyzhardware@gmail.com",
+      "isActive": true,
+      "contactPerson": "Maria Santos",
+      "phone": "0928-444-8899"
+    },
+    {
+      "id": "ADU16Xn6OaXIYDS90LuX",
+      "phone": "0917-123-4567",
+      "contactPerson": "Juan Dela Cruz",
+      "isActive": true,
+      "updatedAt": {
+        "seconds": 1779469854,
+        "nanoseconds": 955000000,
+        "_isTimestamp": true
+      },
+      "address": "Quezon Avenue, Quezon City, Metro Manila",
+      "name": "Pacific Paints & Finishes Inc.",
+      "isArchived": false,
+      "email": "sales@pacificpaints.ph",
+      "createdAt": {
+        "seconds": 1779469854,
+        "nanoseconds": 955000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "NAOXrtpxF8IuUbsQGfGM",
+      "isArchived": false,
+      "createdAt": {
+        "seconds": 1779469855,
+        "nanoseconds": 241000000,
+        "_isTimestamp": true
+      },
+      "email": "sales@pacificpaints.ph",
+      "contactPerson": "Juan Dela Cruz",
+      "phone": "0917-123-4567",
+      "isActive": true,
+      "updatedAt": {
+        "seconds": 1779469855,
+        "nanoseconds": 241000000,
+        "_isTimestamp": true
+      },
+      "address": "Quezon Avenue, Quezon City, Metro Manila",
+      "name": "Pacific Paints & Finishes Inc."
+    },
+    {
+      "id": "Qn4Es0p436Ak6RaBOEkf",
+      "name": "XYZ Hardware & General Merchandise",
+      "updatedAt": {
+        "seconds": 1779469854,
+        "nanoseconds": 878000000,
+        "_isTimestamp": true
+      },
+      "address": "Poblacion, Abra de Ilog, Occidental Mindoro",
+      "contactPerson": "Maria Santos",
+      "phone": "0928-444-8899",
+      "isActive": true,
+      "createdAt": {
+        "seconds": 1779469854,
+        "nanoseconds": 878000000,
+        "_isTimestamp": true
+      },
+      "email": "xyzhardware@gmail.com",
+      "isArchived": false
+    },
+    {
+      "id": "RKbW7OaiaEB3w6MpEAw6",
+      "contactPerson": "Juan Dela Cruz",
+      "phone": "0917-123-4567",
+      "isActive": true,
+      "name": "Pacific Paints & Finishes Inc.",
+      "updatedAt": {
+        "seconds": 1779854626,
+        "nanoseconds": 453000000,
+        "_isTimestamp": true
+      },
+      "createdAt": {
+        "seconds": 1779854626,
+        "nanoseconds": 453000000,
+        "_isTimestamp": true
+      },
+      "address": "Quezon Avenue, Quezon City, Metro Manila",
+      "email": "sales@pacificpaints.ph"
+    },
+    {
+      "id": "T8BAHVJw6HUzM7fhdClB",
+      "isActive": false,
+      "contactPerson": "Ana Gonzales",
+      "phone": "0932-987-6543",
+      "name": "BuildRight Construction Supply",
+      "address": "Mamburao, Occidental Mindoro",
+      "createdAt": {
+        "seconds": 1779854626,
+        "nanoseconds": 813000000,
+        "_isTimestamp": true
+      },
+      "updatedAt": {
+        "seconds": 1779854626,
+        "nanoseconds": 813000000,
+        "_isTimestamp": true
+      },
+      "email": "ana.gonzales@buildright.com"
+    },
+    {
+      "id": "bUaODF5RbuoRyAbAyZtH",
+      "createdAt": {
+        "seconds": 1778909038,
+        "nanoseconds": 482000000,
+        "_isTimestamp": true
+      },
+      "updatedAt": {
+        "seconds": 1778909038,
+        "nanoseconds": 482000000,
+        "_isTimestamp": true
+      },
+      "address": "Mamburao, Occidental Mindoro",
+      "name": "BuildRight Construction Supply",
+      "email": "ana.gonzales@buildright.com",
+      "contactPerson": "Ana Gonzales",
+      "phone": "0932-987-6543",
+      "isActive": false
+    }
+  ],
+  "sales": [
+    {
+      "id": "0OzBzFsUY80EVOplkvws",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "productId": "0XTOWSRGhQGfyEquQRWU",
+          "subtotal": 2400,
+          "price": 800,
+          "name": "BLACK (Gallon)",
+          "qty": 3
+        },
+        {
+          "productId": "BLsmZfyHZ5ylytQTJa0H",
+          "name": "SAND BEIGE (Gallon)",
+          "price": 810,
+          "subtotal": 810,
+          "qty": 1
+        }
+      ],
+      "change": 90,
+      "total": 3210,
+      "transactionId": "ASM-260524-0535",
+      "cashierName": "Super Admin",
+      "subtotal": 3210,
+      "status": "completed",
+      "createdAt": {
+        "seconds": 1779599227,
+        "nanoseconds": 862000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "pointsEarned": 0,
+      "tendered": 3300
+    },
+    {
+      "id": "1q5YEYE1dcjnE66iSc4M",
+      "cashierName": "Super Admin",
+      "transactionId": "ASM-260523-1713",
+      "change": 75,
+      "total": 1825,
+      "items": [
+        {
+          "productId": "Jtv0viZ7wbk8e5LMk5gJ",
+          "name": "SMILEY YELLOW (1L) Finish Paint",
+          "price": 225,
+          "subtotal": 225,
+          "qty": 1
+        },
+        {
+          "productId": "SfLHsr8CfoBAqGG9hoVS",
+          "name": "SMOKE GRAY (Gallon) Finish Paint",
+          "price": 800,
+          "subtotal": 1600,
+          "qty": 2
+        }
+      ],
+      "rewardCardCustomer": "",
+      "status": "completed",
+      "subtotal": 1825,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779495858,
+        "nanoseconds": 615000000,
+        "_isTimestamp": true
+      },
+      "pointsEarned": 0,
+      "tendered": 1900
+    },
+    {
+      "id": "2YDSXTwvxyMhBpeRmH6C",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "discountCard": "ASM-J7ES-6TPQ-T4RZ",
+      "discount": 0,
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779016466,
+        "nanoseconds": 662000000,
+        "_isTimestamp": true
+      },
+      "tendered": 900,
+      "cashierName": "July Lee",
+      "transactionId": "ASM-260517-9171",
+      "change": 90,
+      "total": 810,
+      "items": [
+        {
+          "qty": 1,
+          "productId": "2JfoZ32G1dx2u8pnItom",
+          "subtotal": 810,
+          "price": 810,
+          "name": "CHOCO BROWN (Gallon) Finish Paint"
+        }
+      ],
+      "status": "completed",
+      "subtotal": 810
+    },
+    {
+      "id": "2rISH9s3hLpXxElv5Xnn",
+      "items": [
+        {
+          "qty": 2,
+          "name": "SAND BEIGE (Gallon) Finish Paint",
+          "subtotal": 1620,
+          "price": 810,
+          "productId": "4WpyTD5IGnGH8VXI2U9E"
+        }
+      ],
+      "rewardCardCustomer": "",
+      "transactionId": "ASM-260524-1129",
+      "total": 1620,
+      "change": 80,
+      "cashierName": "Super Admin",
+      "subtotal": 1620,
+      "status": "completed",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779606121,
+        "nanoseconds": 862000000,
+        "_isTimestamp": true
+      },
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "tendered": 1700,
+      "pointsEarned": 0
+    },
+    {
+      "id": "3hXi5o1SHXQEXrgBhpbj",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "discountCard": "",
+      "discount": 0,
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779438238,
+        "nanoseconds": 654000000,
+        "_isTimestamp": true
+      },
+      "tendered": 1000,
+      "cashierName": "July Lee",
+      "transactionId": "ASM-260522-6431",
+      "total": 800,
+      "change": 200,
+      "items": [
+        {
+          "qty": 1,
+          "name": "SEAL GRAY (Gallon) Finish Paint",
+          "price": 800,
+          "subtotal": 800,
+          "productId": "4JbghSPMj6a0905IiHpU"
+        }
+      ],
+      "status": "completed",
+      "subtotal": 800
+    },
+    {
+      "id": "4FmyNUsYn87S4XFn1Csm",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779528512,
+        "nanoseconds": 615000000,
+        "_isTimestamp": true
+      },
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "tendered": 1600,
+      "pointsEarned": 0,
+      "items": [
+        {
+          "qty": 2,
+          "name": "BLACK (Gallon) Finish Paint",
+          "subtotal": 1600,
+          "price": 800,
+          "productId": "ev7eUWHDYouj7b8nvFXX"
+        }
+      ],
+      "rewardCardCustomer": "",
+      "transactionId": "ASM-260523-5187",
+      "total": 1600,
+      "change": 0,
+      "cashierName": "Super Admin",
+      "subtotal": 1600,
+      "status": "completed"
+    },
+    {
+      "id": "4UrYGMH7qi6DbWKQl0ec",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "createdAt": {
+        "seconds": 1779691062,
+        "nanoseconds": 202000000,
+        "_isTimestamp": true
+      },
+      "pointsEarned": 0,
+      "tendered": 1600,
+      "cashierName": "Super Admin",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "qty": 2,
+          "price": 800,
+          "subtotal": 1600,
+          "name": "CHEESE YELLOW (Gallon)",
+          "productId": "yTtcKFXpRj5JGGha1MbQ"
+        }
+      ],
+      "transactionId": "ASM-260525-2272",
+      "change": 0,
+      "total": 1600,
+      "status": "completed",
+      "subtotal": 1600
+    },
+    {
+      "id": "7yeRswGj1gWMJpPPI4Dq",
+      "discountCard": "",
+      "cashierId": "Z6M458sAu8fGV9VdpV5bpqiN5dn2",
+      "discount": 0,
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1778684632,
+        "nanoseconds": 420000000,
+        "_isTimestamp": true
+      },
+      "tendered": 3000,
+      "cashierName": "Juan Dela Cruz",
+      "items": [
+        {
+          "name": "CHOCO BROWN (Gallon) Finish Paint",
+          "subtotal": 1620,
+          "price": 810,
+          "productId": "2JfoZ32G1dx2u8pnItom",
+          "qty": 2
+        }
+      ],
+      "transactionId": "ASM-260513-1768",
+      "total": 1620,
+      "change": 1380,
+      "status": "refunded",
+      "subtotal": 1620,
+      "updatedAt": {
+        "seconds": 1779432041,
+        "nanoseconds": 671000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "8XxqjBnjOKccdwrsnDq0",
+      "status": "completed",
+      "subtotal": 450,
+      "cashierName": "Super Admin",
+      "items": [
+        {
+          "productId": "H1c9lVVbdqb2VxzlMX4m",
+          "price": 225,
+          "subtotal": 450,
+          "name": "CHEESE YELLOW (1L) Finish Paint",
+          "qty": 2
+        }
+      ],
+      "rewardCardCustomer": "",
+      "transactionId": "ASM-260522-2340",
+      "total": 450,
+      "change": 50,
+      "tendered": 500,
+      "pointsEarned": 0,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779416136,
+        "nanoseconds": 899000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "9qvHXvDgBDrMdRVlD8ta",
+      "cashierName": "July Lee",
+      "items": [
+        {
+          "name": "MOCHA BLANCH (1L) Finish Paint",
+          "price": 220,
+          "subtotal": 3960,
+          "productId": "0cWcTqmpIiqUAACXNmqS",
+          "qty": 18
+        }
+      ],
+      "transactionId": "ASM-260426-7626",
+      "change": 40,
+      "total": 3960,
+      "status": "completed",
+      "subtotal": 3960,
+      "discountCard": "",
+      "cashierId": "sjxs8xsALlNIIRDueRV2c14mMB92",
+      "discount": 0,
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1777206770,
+        "nanoseconds": 736000000,
+        "_isTimestamp": true
+      },
+      "tendered": 4000
+    },
+    {
+      "id": "ACkFju8H4wzxdypTxK5c",
+      "status": "completed",
+      "subtotal": 1240,
+      "cashierName": "Super Admin",
+      "items": [
+        {
+          "qty": 1,
+          "productId": "Nq71SJPIoH8s402LHkxq",
+          "name": "SMILEY YELLOW (Gallon)",
+          "subtotal": 800,
+          "price": 800
+        },
+        {
+          "qty": 2,
+          "name": "MOCHA BLANCH (1L) Finish Paint",
+          "price": 220,
+          "subtotal": 440,
+          "productId": "0cWcTqmpIiqUAACXNmqS"
+        }
+      ],
+      "rewardCardCustomer": "",
+      "total": 1240,
+      "change": 60,
+      "transactionId": "ASM-260521-9600",
+      "pointsEarned": 0,
+      "tendered": 1300,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779334588,
+        "nanoseconds": 621000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": ""
+    },
+    {
+      "id": "BPpjY1zvz0bO20q6bk6D",
+      "status": "completed",
+      "subtotal": 6600,
+      "cashierName": "July Lee",
+      "items": [
+        {
+          "name": "MOCHA BLANCH (1L) Finish Paint",
+          "subtotal": 6600,
+          "price": 220,
+          "productId": "0cWcTqmpIiqUAACXNmqS",
+          "qty": 30
+        }
+      ],
+      "change": 400,
+      "total": 6600,
+      "transactionId": "ASM-260426-9847",
+      "tendered": 7000,
+      "discountCard": "",
+      "cashierId": "sjxs8xsALlNIIRDueRV2c14mMB92",
+      "createdAt": {
+        "seconds": 1777206666,
+        "nanoseconds": 580000000,
+        "_isTimestamp": true
+      },
+      "discount": 0,
+      "paymentMethod": "cash"
+    },
+    {
+      "id": "BnqBCOs8kNX7Bg51orRU",
+      "status": "completed",
+      "subtotal": 220,
+      "cashierName": "Demo Cashier",
+      "items": [
+        {
+          "productId": "0cWcTqmpIiqUAACXNmqS",
+          "subtotal": 220,
+          "price": 220,
+          "name": "MOCHA BLANCH (1L) Finish Paint",
+          "qty": 1
+        }
+      ],
+      "change": 80,
+      "total": 220,
+      "transactionId": "ASM-260517-3373",
+      "tendered": 300,
+      "discountCard": "",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1778993081,
+        "nanoseconds": 567000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "discount": 0
+    },
+    {
+      "id": "EXsDVNhus1QC43LwrQze",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779789251,
+        "nanoseconds": 776000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "pointsEarned": 0,
+      "tendered": 1600,
+      "cashierName": "Super Admin",
+      "change": 0,
+      "total": 1600,
+      "transactionId": "ASM-260526-6627",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "qty": 2,
+          "price": 800,
+          "subtotal": 1600,
+          "name": "CROWN SUNRISE (Gallon) Finish Paint",
+          "productId": "GMSLoJWjJh5NdvBz5Hai"
+        }
+      ],
+      "status": "completed",
+      "subtotal": 1600
+    },
+    {
+      "id": "EdQnsFziQMznsacSjegt",
+      "total": 5775,
+      "change": 25,
+      "transactionId": "ASM-260521-4601",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "productId": "AriJJTAP3ezd8jVgTu7i",
+          "price": 1925,
+          "subtotal": 5775,
+          "name": "JOLLY ORANGE (Gallon)",
+          "qty": 3
+        }
+      ],
+      "cashierName": "Super Admin",
+      "subtotal": 5775,
+      "status": "completed",
+      "createdAt": {
+        "seconds": 1779322935,
+        "nanoseconds": 621000000,
+        "_isTimestamp": true
+      },
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "pointsEarned": 0,
+      "tendered": 5800
+    },
+    {
+      "id": "F7Nwnylx9FA22x47LysP",
+      "pointsEarned": 0,
+      "tendered": 3400,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779598023,
+        "nanoseconds": 862000000,
+        "_isTimestamp": true
+      },
+      "status": "completed",
+      "subtotal": 3390,
+      "cashierName": "Super Admin",
+      "transactionId": "ASM-260524-2542",
+      "change": 10,
+      "total": 3390,
+      "items": [
+        {
+          "qty": 2,
+          "productId": "zijlVWrTrWo0d4hV58PF",
+          "subtotal": 990,
+          "price": 495,
+          "name": "JOLLY ORANGE (1L)"
+        },
+        {
+          "qty": 3,
+          "subtotal": 2400,
+          "price": 800,
+          "name": "MALE SUN GOLD (Gallon)",
+          "productId": "QR8Kkbw4UPfz6hfdreuD"
+        }
+      ],
+      "rewardCardCustomer": ""
+    },
+    {
+      "id": "FLo1lWzCLaipOJMSPOhl",
+      "pointsEarned": 0,
+      "tendered": 2200,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779591509,
+        "nanoseconds": 862000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "status": "completed",
+      "subtotal": 2145,
+      "cashierName": "Super Admin",
+      "items": [
+        {
+          "qty": 1,
+          "name": "CHOCO BROWN (Gallon) Finish Paint",
+          "price": 810,
+          "subtotal": 810,
+          "productId": "2JfoZ32G1dx2u8pnItom"
+        },
+        {
+          "name": "MOCHA BLANCH (1L)",
+          "price": 220,
+          "subtotal": 660,
+          "productId": "riMkhRPC86jSYSP3ferm",
+          "qty": 3
+        },
+        {
+          "qty": 3,
+          "subtotal": 675,
+          "price": 225,
+          "name": "SMOKE GRAY (1L)",
+          "productId": "94XUAClwEOo59oOE922T"
+        }
+      ],
+      "rewardCardCustomer": "",
+      "change": 55,
+      "total": 2145,
+      "transactionId": "ASM-260524-0541"
+    },
+    {
+      "id": "G8xcNWPFH60lot6QoVUP",
+      "pointsEarned": 0,
+      "tendered": 600,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "createdAt": {
+        "seconds": 1779684520,
+        "nanoseconds": 202000000,
+        "_isTimestamp": true
+      },
+      "status": "completed",
+      "subtotal": 565,
+      "cashierName": "Super Admin",
+      "transactionId": "ASM-260525-8779",
+      "change": 35,
+      "total": 565,
+      "items": [
+        {
+          "qty": 1,
+          "productId": "08UjH9kKDyQZE7eWOtVF",
+          "subtotal": 565,
+          "price": 565,
+          "name": "SOLO GLOSS LATEX WHITE (Gallon)"
+        }
+      ],
+      "rewardCardCustomer": ""
+    },
+    {
+      "id": "KM1A9DCkk7l9fRK47ch0",
+      "pointsEarned": 0,
+      "tendered": 3300,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779436330,
+        "nanoseconds": 899000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "status": "completed",
+      "subtotal": 3290,
+      "cashierName": "Super Admin",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "productId": "weypOQp578F98DObKWiK",
+          "name": "CHEESE YELLOW (Gallon) Finish Paint",
+          "price": 800,
+          "subtotal": 800,
+          "qty": 1
+        },
+        {
+          "qty": 1,
+          "subtotal": 565,
+          "price": 565,
+          "name": "SOLO GLOSS LATEX WHITE (Gallon)",
+          "productId": "08UjH9kKDyQZE7eWOtVF"
+        },
+        {
+          "name": "JOLLY ORANGE (Gallon) Finish Paint",
+          "subtotal": 1925,
+          "price": 1925,
+          "productId": "nEKNXJ5k2Td7Q0sij04z",
+          "qty": 1
+        }
+      ],
+      "change": 10,
+      "total": 3290,
+      "transactionId": "ASM-260522-4759"
+    },
+    {
+      "id": "SOyFe0hGdpvSIBe7gYCg",
+      "transactionId": "ASM-260522-7365",
+      "change": 50,
+      "total": 2850,
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "qty": 2,
+          "productId": "w0UWMtK5cHkUd50v69Mj",
+          "price": 225,
+          "subtotal": 450,
+          "name": "MALE SUN GOLD (1L)"
+        },
+        {
+          "price": 800,
+          "subtotal": 2400,
+          "name": "SEAL GRAY (Gallon) Finish Paint",
+          "productId": "4JbghSPMj6a0905IiHpU",
+          "qty": 3
+        }
+      ],
+      "cashierName": "Super Admin",
+      "subtotal": 2850,
+      "status": "completed",
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "createdAt": {
+        "seconds": 1779418023,
+        "nanoseconds": 899000000,
+        "_isTimestamp": true
+      },
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "pointsEarned": 0,
+      "tendered": 2900
+    },
+    {
+      "id": "T6SCg1sBbqkmayIha3N3",
+      "status": "completed",
+      "subtotal": 3545,
+      "cashierName": "Super Admin",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "qty": 3,
+          "name": "SAND BEIGE (Gallon) Finish Paint",
+          "price": 810,
+          "subtotal": 2430,
+          "productId": "4WpyTD5IGnGH8VXI2U9E"
+        },
+        {
+          "name": "MALE SUN GOLD (1L)",
+          "subtotal": 675,
+          "price": 225,
+          "productId": "w0UWMtK5cHkUd50v69Mj",
+          "qty": 3
+        },
+        {
+          "name": "CHOCO BROWN (1L)",
+          "price": 220,
+          "subtotal": 440,
+          "productId": "3FXv1gGranwtUsWRM0uU",
+          "qty": 2
+        }
+      ],
+      "total": 3545,
+      "change": 55,
+      "transactionId": "ASM-260527-3139",
+      "pointsEarned": 0,
+      "tendered": 3600,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779852184,
+        "nanoseconds": 109000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": ""
+    },
+    {
+      "id": "VWNvaIK73B5KVmLwrBQv",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779851646,
+        "nanoseconds": 109000000,
+        "_isTimestamp": true
+      },
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "pointsEarned": 0,
+      "tendered": 1300,
+      "cashierName": "Super Admin",
+      "items": [
+        {
+          "productId": "5MOFwEswAy8w7P8IXt04",
+          "name": "CALAMANSI (1L)",
+          "subtotal": 450,
+          "price": 225,
+          "qty": 2
+        },
+        {
+          "qty": 1,
+          "subtotal": 220,
+          "price": 220,
+          "name": "CHOCO BROWN (1L) Finish Paint",
+          "productId": "ROnB1qAjCa5unurFy6OG"
+        },
+        {
+          "price": 565,
+          "subtotal": 565,
+          "name": "SOLO GLOSS LATEX WHITE (Gallon)",
+          "productId": "08UjH9kKDyQZE7eWOtVF",
+          "qty": 1
+        }
+      ],
+      "rewardCardCustomer": "",
+      "change": 65,
+      "total": 1235,
+      "transactionId": "ASM-260527-7638",
+      "status": "completed",
+      "subtotal": 1235
+    },
+    {
+      "id": "Va7WqKQ3p8JZy81d1Opd",
+      "cashierName": "Super Admin",
+      "transactionId": "ASM-260526-5009",
+      "total": 450,
+      "change": 50,
+      "items": [
+        {
+          "qty": 1,
+          "name": "PEACH (1L)",
+          "price": 225,
+          "subtotal": 225,
+          "productId": "FHbLKLOhyDVsob4v79Tm"
+        },
+        {
+          "qty": 1,
+          "subtotal": 225,
+          "price": 225,
+          "name": "CROWN SUNRISE (1L) Finish Paint",
+          "productId": "4odl74T0aTRGwFUnSlV0"
+        }
+      ],
+      "rewardCardCustomer": "",
+      "status": "completed",
+      "subtotal": 450,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779784407,
+        "nanoseconds": 776000000,
+        "_isTimestamp": true
+      },
+      "tendered": 500,
+      "pointsEarned": 0
+    },
+    {
+      "id": "Z6swCaKyMIamkTedwbHX",
+      "status": "completed",
+      "subtotal": 1865,
+      "cashierName": "Super Admin",
+      "items": [
+        {
+          "qty": 1,
+          "productId": "ev7eUWHDYouj7b8nvFXX",
+          "price": 800,
+          "subtotal": 800,
+          "name": "BLACK (Gallon) Finish Paint"
+        },
+        {
+          "qty": 1,
+          "productId": "RmyJH0awGpmbCukHB7fa",
+          "name": "SOLO FLAT LATEX WHITE (Gallon)",
+          "subtotal": 405,
+          "price": 405
+        },
+        {
+          "subtotal": 660,
+          "price": 220,
+          "name": "SAND BEIGE (1L)",
+          "productId": "N5nPfysTs0dgfB84mvnX",
+          "qty": 3
+        }
+      ],
+      "rewardCardCustomer": "",
+      "change": 35,
+      "total": 1865,
+      "transactionId": "ASM-260521-9934",
+      "pointsEarned": 0,
+      "tendered": 1900,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779347222,
+        "nanoseconds": 621000000,
+        "_isTimestamp": true
+      },
+      "rewardCardNumber": "",
+      "paymentMethod": "cash"
+    },
+    {
+      "id": "b8dkc5iBZ8toi7PhxAdr",
+      "items": [
+        {
+          "productId": "0cWcTqmpIiqUAACXNmqS",
+          "subtotal": 220,
+          "price": 220,
+          "name": "MOCHA BLANCH (1L) Finish Paint",
+          "qty": 1
+        }
+      ],
+      "transactionId": "ASM-260425-8454",
+      "discount": 0,
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1777104895,
+        "nanoseconds": 602000000,
+        "_isTimestamp": true
+      },
+      "change": 280,
+      "total": 220,
+      "cashierName": "Portal Cashier",
+      "cashierId": "Z6M458sAu8fGV9VdpV5bpqiN5dn2",
+      "subtotal": 220,
+      "tendered": 500,
+      "status": "completed"
+    },
+    {
+      "id": "ceaJJ0Lm9qM64wjorexQ",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779773313,
+        "nanoseconds": 776000000,
+        "_isTimestamp": true
+      },
+      "pointsEarned": 0,
+      "tendered": 2200,
+      "cashierName": "Super Admin",
+      "transactionId": "ASM-260526-9194",
+      "change": 15,
+      "total": 2185,
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "productId": "BLsmZfyHZ5ylytQTJa0H",
+          "name": "SAND BEIGE (Gallon)",
+          "subtotal": 1620,
+          "price": 810,
+          "qty": 2
+        },
+        {
+          "subtotal": 565,
+          "price": 565,
+          "name": "SOLO GLOSS LATEX WHITE (Gallon)",
+          "productId": "S8XS6oSFxSF7nwRV4kPR",
+          "qty": 1
+        }
+      ],
+      "status": "completed",
+      "subtotal": 2185
+    },
+    {
+      "id": "cu3hX5Y5KgdcBIQW86U5",
+      "subtotal": 225,
+      "status": "completed",
+      "transactionId": "ASM-260523-9423",
+      "change": 75,
+      "total": 225,
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "name": "CROWN SUNRISE (1L) Finish Paint",
+          "subtotal": 225,
+          "price": 225,
+          "productId": "4odl74T0aTRGwFUnSlV0",
+          "qty": 1
+        }
+      ],
+      "cashierName": "Super Admin",
+      "pointsEarned": 0,
+      "tendered": 300,
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "createdAt": {
+        "seconds": 1779521600,
+        "nanoseconds": 615000000,
+        "_isTimestamp": true
+      },
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2"
+    },
+    {
+      "id": "d9eNo30kHleNvugWlpMS",
+      "tendered": 2000,
+      "discountCard": "",
+      "cashierId": "Z6M458sAu8fGV9VdpV5bpqiN5dn2",
+      "createdAt": {
+        "seconds": 1777439632,
+        "nanoseconds": 193000000,
+        "_isTimestamp": true
+      },
+      "discount": 0,
+      "paymentMethod": "cash",
+      "status": "completed",
+      "subtotal": 1600,
+      "cashierName": "Juan Dela Cruz",
+      "items": [
+        {
+          "qty": 2,
+          "name": "SEAL GRAY (Gallon) Finish Paint",
+          "subtotal": 1600,
+          "price": 800,
+          "productId": "4JbghSPMj6a0905IiHpU"
+        }
+      ],
+      "change": 400,
+      "total": 1600,
+      "transactionId": "ASM-260429-6681"
+    },
+    {
+      "id": "gAxM3atLvcDNnbwTnjpK",
+      "transactionId": "ASM-260521-8019",
+      "total": 895,
+      "change": 5,
+      "items": [
+        {
+          "subtotal": 675,
+          "price": 225,
+          "name": "CHEESE YELLOW (1L) Finish Paint",
+          "productId": "H1c9lVVbdqb2VxzlMX4m",
+          "qty": 3
+        },
+        {
+          "qty": 1,
+          "price": 220,
+          "subtotal": 220,
+          "name": "CHOCO BROWN (1L) Finish Paint",
+          "productId": "ROnB1qAjCa5unurFy6OG"
+        }
+      ],
+      "rewardCardCustomer": "",
+      "cashierName": "Super Admin",
+      "subtotal": 895,
+      "status": "completed",
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "createdAt": {
+        "seconds": 1779327648,
+        "nanoseconds": 621000000,
+        "_isTimestamp": true
+      },
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "tendered": 900,
+      "pointsEarned": 0
+    },
+    {
+      "id": "hLJQVI3eE9T2HHLL0Ia1",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779865541,
+        "nanoseconds": 109000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "pointsEarned": 0,
+      "tendered": 300,
+      "cashierName": "Super Admin",
+      "total": 220,
+      "change": 80,
+      "transactionId": "ASM-260527-1538",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "qty": 1,
+          "productId": "6hVDubYsJt3UsdpK4XYo",
+          "name": "BLACK (1L) Finish Paint",
+          "subtotal": 220,
+          "price": 220
+        }
+      ],
+      "status": "completed",
+      "subtotal": 220
+    },
+    {
+      "id": "j2CBep4KztHf3VpuXlfm",
+      "status": "completed",
+      "subtotal": 5250,
+      "cashierName": "Super Admin",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "qty": 3,
+          "productId": "weypOQp578F98DObKWiK",
+          "name": "CHEESE YELLOW (Gallon) Finish Paint",
+          "price": 800,
+          "subtotal": 2400
+        },
+        {
+          "qty": 2,
+          "productId": "a76H8JCcRwFYiLeJMH9H",
+          "subtotal": 450,
+          "price": 225,
+          "name": "CROWN SUNRISE (1L)"
+        },
+        {
+          "productId": "L3uLDLpNa7cRkEJZXd0F",
+          "price": 800,
+          "subtotal": 2400,
+          "name": "CALAMANSI (Gallon)",
+          "qty": 3
+        }
+      ],
+      "total": 5250,
+      "change": 50,
+      "transactionId": "ASM-260525-2895",
+      "pointsEarned": 0,
+      "tendered": 5300,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779695241,
+        "nanoseconds": 202000000,
+        "_isTimestamp": true
+      },
+      "rewardCardNumber": "",
+      "paymentMethod": "cash"
+    },
+    {
+      "id": "n1zJQ5FrlbqlLw7wOjRk",
+      "pointsEarned": 0,
+      "tendered": 3100,
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "createdAt": {
+        "seconds": 1779680035,
+        "nanoseconds": 202000000,
+        "_isTimestamp": true
+      },
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "subtotal": 3060,
+      "status": "completed",
+      "items": [
+        {
+          "productId": "6hVDubYsJt3UsdpK4XYo",
+          "subtotal": 660,
+          "price": 220,
+          "name": "BLACK (1L) Finish Paint",
+          "qty": 3
+        },
+        {
+          "productId": "SagTl7FbiTBVh5fKPsrv",
+          "name": "MALE SUN GOLD (Gallon) Finish Paint",
+          "subtotal": 2400,
+          "price": 800,
+          "qty": 3
+        }
+      ],
+      "rewardCardCustomer": "",
+      "transactionId": "ASM-260525-2960",
+      "change": 40,
+      "total": 3060,
+      "cashierName": "Super Admin"
+    },
+    {
+      "id": "oIYWjUrpeD47J6RNuLhR",
+      "change": 0,
+      "total": 1600,
+      "transactionId": "ASM-260522-9606",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "qty": 2,
+          "name": "SMOKE GRAY (Gallon)",
+          "subtotal": 1600,
+          "price": 800,
+          "productId": "kQxslEdkftymkBeUJXHA"
+        }
+      ],
+      "cashierName": "Super Admin",
+      "subtotal": 1600,
+      "status": "completed",
+      "createdAt": {
+        "seconds": 1779413533,
+        "nanoseconds": 899000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "pointsEarned": 0,
+      "tendered": 1600
+    },
+    {
+      "id": "oU6eGKHK5KSkF2AdvZzf",
+      "tendered": 300,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "discountCard": "",
+      "paymentMethod": "cash",
+      "discount": 0,
+      "createdAt": {
+        "seconds": 1779438813,
+        "nanoseconds": 845000000,
+        "_isTimestamp": true
+      },
+      "status": "completed",
+      "subtotal": 225,
+      "cashierName": "July Lee",
+      "transactionId": "ASM-260522-4594",
+      "total": 225,
+      "change": 75,
+      "items": [
+        {
+          "qty": 1,
+          "name": "SMOKE GRAY (1L) Finish Paint",
+          "price": 225,
+          "subtotal": 225,
+          "productId": "3c9mS3d8tfHhp3Sucwis"
+        }
+      ]
+    },
+    {
+      "id": "qvDUVWCRQhKdKiO4tylQ",
+      "pointsEarned": 0,
+      "tendered": 700,
+      "createdAt": {
+        "seconds": 1779863857,
+        "nanoseconds": 109000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "subtotal": 675,
+      "status": "completed",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "productId": "Jtv0viZ7wbk8e5LMk5gJ",
+          "name": "SMILEY YELLOW (1L) Finish Paint",
+          "subtotal": 675,
+          "price": 225,
+          "qty": 3
+        }
+      ],
+      "change": 25,
+      "total": 675,
+      "transactionId": "ASM-260527-8332",
+      "cashierName": "Super Admin"
+    },
+    {
+      "id": "sY3AaveJgEwV6lNCApcc",
+      "cashierName": "Super Admin",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "price": 225,
+          "subtotal": 450,
+          "name": "PEACH (1L)",
+          "productId": "FHbLKLOhyDVsob4v79Tm",
+          "qty": 2
+        },
+        {
+          "productId": "5MOFwEswAy8w7P8IXt04",
+          "price": 225,
+          "subtotal": 225,
+          "name": "CALAMANSI (1L)",
+          "qty": 1
+        }
+      ],
+      "change": 25,
+      "total": 675,
+      "transactionId": "ASM-260523-5065",
+      "status": "completed",
+      "subtotal": 675,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "createdAt": {
+        "seconds": 1779500454,
+        "nanoseconds": 615000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "pointsEarned": 0,
+      "tendered": 700
+    },
+    {
+      "id": "sYr4I9tFzHa0WSl2L8BA",
+      "paymentMethod": "cash",
+      "discount": 0,
+      "createdAt": {
+        "seconds": 1777210630,
+        "nanoseconds": 314000000,
+        "_isTimestamp": true
+      },
+      "discountCard": "",
+      "cashierId": "sjxs8xsALlNIIRDueRV2c14mMB92",
+      "tendered": 10499,
+      "items": [
+        {
+          "productId": "0tGBAem7wQBQxHT3bHSn",
+          "name": "MALE SUN GOLD (1L) Finish Paint",
+          "price": 225,
+          "subtotal": 10350,
+          "qty": 46
+        }
+      ],
+      "transactionId": "ASM-260426-3619",
+      "total": 10350,
+      "change": 149,
+      "cashierName": "July Lee",
+      "subtotal": 10350,
+      "status": "completed"
+    },
+    {
+      "id": "u0XzS0RCWzLPmx5m8dg6",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779847564,
+        "nanoseconds": 109000000,
+        "_isTimestamp": true
+      },
+      "pointsEarned": 0,
+      "tendered": 300,
+      "cashierName": "Super Admin",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "subtotal": 220,
+          "price": 220,
+          "name": "SEAL GRAY (1L) Finish Paint",
+          "productId": "J3mxr5rpOgiRfim3uroi",
+          "qty": 1
+        }
+      ],
+      "transactionId": "ASM-260527-2486",
+      "total": 220,
+      "change": 80,
+      "status": "completed",
+      "subtotal": 220
+    },
+    {
+      "id": "umAnDomBJdiZ3phGhxGY",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "discountCard": "",
+      "createdAt": {
+        "seconds": 1779438379,
+        "nanoseconds": 935000000,
+        "_isTimestamp": true
+      },
+      "paymentMethod": "cash",
+      "discount": 0,
+      "tendered": 1000,
+      "cashierName": "July Lee",
+      "change": 200,
+      "total": 800,
+      "transactionId": "ASM-260522-7749",
+      "items": [
+        {
+          "price": 800,
+          "subtotal": 800,
+          "name": "SEAL GRAY (Gallon) Finish Paint",
+          "productId": "4JbghSPMj6a0905IiHpU",
+          "qty": 1
+        }
+      ],
+      "status": "completed",
+      "subtotal": 800
+    },
+    {
+      "id": "xD5lAgUydNG2Vhai7IDn",
+      "subtotal": 5875,
+      "status": "completed",
+      "items": [
+        {
+          "name": "SAND BEIGE (Gallon) Finish Paint",
+          "subtotal": 1620,
+          "price": 810,
+          "productId": "4WpyTD5IGnGH8VXI2U9E",
+          "qty": 2
+        },
+        {
+          "name": "JOLLY ORANGE (Gallon)",
+          "subtotal": 3850,
+          "price": 1925,
+          "productId": "AriJJTAP3ezd8jVgTu7i",
+          "qty": 2
+        },
+        {
+          "productId": "Cqs78h1VikveM6FzPIv2",
+          "price": 405,
+          "subtotal": 405,
+          "name": "SOLO FLAT LATEX WHITE (Gallon)",
+          "qty": 1
+        }
+      ],
+      "rewardCardCustomer": "",
+      "transactionId": "ASM-260523-6317",
+      "change": 25,
+      "total": 5875,
+      "cashierName": "Super Admin",
+      "pointsEarned": 0,
+      "tendered": 5900,
+      "paymentMethod": "cash",
+      "rewardCardNumber": "",
+      "createdAt": {
+        "seconds": 1779521428,
+        "nanoseconds": 615000000,
+        "_isTimestamp": true
+      },
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2"
+    },
+    {
+      "id": "yEISnRBoOEEEoF8yUGyF",
+      "pointsEarned": 0,
+      "tendered": 1900,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779351088,
+        "nanoseconds": 621000000,
+        "_isTimestamp": true
+      },
+      "status": "completed",
+      "subtotal": 1825,
+      "cashierName": "Super Admin",
+      "rewardCardCustomer": "",
+      "items": [
+        {
+          "price": 800,
+          "subtotal": 1600,
+          "name": "MALE SUN GOLD (Gallon)",
+          "productId": "QR8Kkbw4UPfz6hfdreuD",
+          "qty": 2
+        },
+        {
+          "qty": 1,
+          "name": "SMOKE GRAY (1L) Finish Paint",
+          "subtotal": 225,
+          "price": 225,
+          "productId": "3c9mS3d8tfHhp3Sucwis"
+        }
+      ],
+      "transactionId": "ASM-260521-8042",
+      "change": 75,
+      "total": 1825
+    },
+    {
+      "id": "ztoM1nhAC7y8UjKCKJI4",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "rewardCardNumber": "",
+      "paymentMethod": "cash",
+      "createdAt": {
+        "seconds": 1779341988,
+        "nanoseconds": 621000000,
+        "_isTimestamp": true
+      },
+      "tendered": 1400,
+      "pointsEarned": 0,
+      "cashierName": "Super Admin",
+      "transactionId": "ASM-260521-5748",
+      "total": 1395,
+      "change": 5,
+      "items": [
+        {
+          "name": "SMOKE GRAY (1L) Finish Paint",
+          "price": 225,
+          "subtotal": 225,
+          "productId": "3c9mS3d8tfHhp3Sucwis",
+          "qty": 1
+        },
+        {
+          "qty": 3,
+          "name": "PEACH (1L) Finish Paint",
+          "subtotal": 675,
+          "price": 225,
+          "productId": "IYwDLLOe1MuTRUbIgyuL"
+        },
+        {
+          "qty": 1,
+          "productId": "zijlVWrTrWo0d4hV58PF",
+          "name": "JOLLY ORANGE (1L)",
+          "price": 495,
+          "subtotal": 495
+        }
+      ],
+      "rewardCardCustomer": "",
+      "status": "completed",
+      "subtotal": 1395
+    }
+  ],
+  "rewardCards": [
+    {
+      "id": "5jo9P4l7iH6PoHkjTV4k",
+      "isArchived": false,
+      "customerName": "Maria Santos",
+      "pointsToday": 0,
+      "createdAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 350000000,
+        "_isTimestamp": true
+      },
+      "pointsRedeemed": 72,
+      "lastActivityAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 350000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 200,
+      "status": "active",
+      "cardNumber": "ASM-J1PV-P5GG-OF9Y",
+      "currentPoints": 128
+    },
+    {
+      "id": "D51Kh81oppl5T2qyQZJL",
+      "customerName": "Juan Dela Cruz",
+      "isArchived": false,
+      "createdAt": {
+        "seconds": 1779854678,
+        "nanoseconds": 595000000,
+        "_isTimestamp": true
+      },
+      "pointsToday": 25,
+      "lastActivityAt": {
+        "seconds": 1779854678,
+        "nanoseconds": 595000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 87,
+      "status": "active",
+      "pointsRedeemed": 0,
+      "currentPoints": 87,
+      "cardNumber": "ASM-RK20-2FZW-84RW"
+    },
+    {
+      "id": "DyHLbuzb1Mt0Ah1iJGB7",
+      "pointsRedeemed": 124,
+      "totalPointsEarned": 280,
+      "lastActivityAt": {
+        "seconds": 1779854679,
+        "nanoseconds": 49000000,
+        "_isTimestamp": true
+      },
+      "status": "active",
+      "currentPoints": 156,
+      "cardNumber": "ASM-VCLY-6NXS-QXK1",
+      "customerName": "Ana Garcia",
+      "isArchived": false,
+      "pointsToday": 8,
+      "createdAt": {
+        "seconds": 1779854679,
+        "nanoseconds": 49000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "EmpSXfxyXJmT11W0n3mF",
+      "isArchived": false,
+      "customerName": "Juan Dela Cruz",
+      "createdAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 654000000,
+        "_isTimestamp": true
+      },
+      "pointsToday": 25,
+      "status": "active",
+      "lastActivityAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 654000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 87,
+      "pointsRedeemed": 0,
+      "cardNumber": "ASM-FTEW-K91G-K1K1",
+      "currentPoints": 87
+    },
+    {
+      "id": "FOMCkJmBklrIk75JuKNC",
+      "isArchived": false,
+      "customerName": "Kevin Balquin",
+      "createdAt": {
+        "seconds": 1779854677,
+        "nanoseconds": 737000000,
+        "_isTimestamp": true
+      },
+      "pointsToday": 12,
+      "status": "active",
+      "totalPointsEarned": 45,
+      "lastActivityAt": {
+        "seconds": 1779854677,
+        "nanoseconds": 737000000,
+        "_isTimestamp": true
+      },
+      "pointsRedeemed": 0,
+      "cardNumber": "ASM-2V0J-KEV4-UVE0",
+      "currentPoints": 45
+    },
+    {
+      "id": "Oc5EtSKATWZlYruViiqY",
+      "pointsRedeemed": 0,
+      "status": "active",
+      "lastActivityAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 46000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 45,
+      "cardNumber": "ASM-2V0J-KEV4-UVE0",
+      "currentPoints": 45,
+      "isArchived": false,
+      "customerName": "Kevin Balquin",
+      "pointsToday": 12,
+      "createdAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 46000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "gUGieVJ1nr1hNX9nzr1e",
+      "pointsRedeemed": 117,
+      "lastActivityAt": {
+        "seconds": 1779854679,
+        "nanoseconds": 672000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 320,
+      "status": "active",
+      "cardNumber": "ASM-YE64-MAWV-4STS",
+      "currentPoints": 203,
+      "isArchived": false,
+      "customerName": "Rosa Villanueva",
+      "pointsToday": 18,
+      "createdAt": {
+        "seconds": 1779854679,
+        "nanoseconds": 672000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "kvoKKxOnXwDYLQevOlI2",
+      "isArchived": false,
+      "customerName": "Maria Santos",
+      "pointsToday": 0,
+      "createdAt": {
+        "seconds": 1779854678,
+        "nanoseconds": 158000000,
+        "_isTimestamp": true
+      },
+      "pointsRedeemed": 72,
+      "status": "active",
+      "totalPointsEarned": 200,
+      "lastActivityAt": {
+        "seconds": 1779854678,
+        "nanoseconds": 158000000,
+        "_isTimestamp": true
+      },
+      "cardNumber": "ASM-W0BE-5AP2-P2ZT",
+      "currentPoints": 128
+    },
+    {
+      "id": "qZDmqXfxzQyqgmhbNyt3",
+      "pointsRedeemed": 124,
+      "lastActivityAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 962000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 280,
+      "status": "active",
+      "currentPoints": 156,
+      "cardNumber": "ASM-9ZAM-XDI6-IN3D",
+      "customerName": "Ana Garcia",
+      "isArchived": false,
+      "pointsToday": 8,
+      "createdAt": {
+        "seconds": 1779483085,
+        "nanoseconds": 962000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "wEIvjTqFd07utjWFMDfx",
+      "cardNumber": "ASM-00CN-LA2Y-O6QC",
+      "currentPoints": 42,
+      "pointsRedeemed": 0,
+      "totalPointsEarned": 42,
+      "lastActivityAt": {
+        "seconds": 1779483086,
+        "nanoseconds": 255000000,
+        "_isTimestamp": true
+      },
+      "status": "active",
+      "pointsToday": 0,
+      "createdAt": {
+        "seconds": 1779483086,
+        "nanoseconds": 255000000,
+        "_isTimestamp": true
+      },
+      "isArchived": false,
+      "customerName": "Carlos Mendez"
+    },
+    {
+      "id": "zHhdGlO252M2lBQZNfFi",
+      "createdAt": {
+        "seconds": 1779483086,
+        "nanoseconds": 546000000,
+        "_isTimestamp": true
+      },
+      "pointsToday": 18,
+      "isArchived": false,
+      "customerName": "Rosa Villanueva",
+      "cardNumber": "ASM-V7UI-CCYY-D9L5",
+      "currentPoints": 203,
+      "status": "active",
+      "lastActivityAt": {
+        "seconds": 1779483086,
+        "nanoseconds": 546000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 320,
+      "pointsRedeemed": 117
+    },
+    {
+      "id": "zJ3yFIvjIufWYxX75RQR",
+      "customerName": "Carlos Mendez",
+      "isArchived": false,
+      "pointsToday": 0,
+      "createdAt": {
+        "seconds": 1779854679,
+        "nanoseconds": 374000000,
+        "_isTimestamp": true
+      },
+      "pointsRedeemed": 0,
+      "status": "active",
+      "lastActivityAt": {
+        "seconds": 1779854679,
+        "nanoseconds": 374000000,
+        "_isTimestamp": true
+      },
+      "totalPointsEarned": 42,
+      "currentPoints": 42,
+      "cardNumber": "ASM-DEOJ-I383-WPGZ"
+    }
+  ],
+  "refundExchangeRecords": [
+    {
+      "id": "98LmVIT5sqmAt27CxlLx",
+      "returnedCondition": "defective",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "replacementItems": [
+        {
+          "productId": "4JbghSPMj6a0905IiHpU",
+          "price": 800,
+          "qty": 1,
+          "name": "SEAL GRAY (Gallon) Finish Paint"
+        }
+      ],
+      "totalRefund": 810,
+      "createdAt": {
+        "seconds": 1779541175,
+        "nanoseconds": 629000000,
+        "_isTimestamp": true
+      },
+      "originalSaleDocId": "2YDSXTwvxyMhBpeRmH6C",
+      "notes": "Replacement completed by July Lee",
+      "exchangeId": "98LmVIT5sqmAt27CxlLx",
+      "replacementValue": 800,
+      "reason": "wrong item na lang",
+      "exchangeReference": "EX-260523-70567",
+      "originalSaleId": "ASM-260517-9171",
+      "cashierName": "July Lee",
+      "returnedItems": [
+        {
+          "qty": 1,
+          "name": "CHOCO BROWN (Gallon) Finish Paint",
+          "productId": "2JfoZ32G1dx2u8pnItom",
+          "amount": 810
+        }
+      ],
+      "status": "Exchange Approved",
+      "additionalPayment": 0,
+      "exchangeCredit": 10
+    },
+    {
+      "id": "fAt316KTZHLBOqF6bGmJ",
+      "cashierName": "July Lee",
+      "returnedItems": [
+        {
+          "amount": 810,
+          "productId": "2JfoZ32G1dx2u8pnItom",
+          "name": "CHOCO BROWN (Gallon) Finish Paint",
+          "qty": 1
+        }
+      ],
+      "status": "Exchange Approved",
+      "additionalPayment": 0,
+      "exchangeCredit": 360,
+      "returnedCondition": "defective",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "replacementItems": [
+        {
+          "productId": "0tGBAem7wQBQxHT3bHSn",
+          "qty": 2,
+          "price": 225,
+          "name": "MALE SUN GOLD (1L) Finish Paint"
+        }
+      ],
+      "createdAt": {
+        "seconds": 1779537448,
+        "nanoseconds": 491000000,
+        "_isTimestamp": true
+      },
+      "totalRefund": 810,
+      "notes": "Replacement completed by July Lee",
+      "originalSaleDocId": "2YDSXTwvxyMhBpeRmH6C",
+      "replacementValue": 450,
+      "exchangeId": "fAt316KTZHLBOqF6bGmJ",
+      "reason": "Product defective",
+      "exchangeReference": "EX-260523-50986",
+      "originalSaleId": "ASM-260517-9171"
+    },
+    {
+      "id": "hfjeFo2zoQRQseAr5dyN",
+      "exchangeId": "hfjeFo2zoQRQseAr5dyN",
+      "replacementValue": 810,
+      "originalSaleId": "ASM-260517-3373",
+      "reason": "Expiration date na sha",
+      "exchangeReference": "EX-260523-87831",
+      "replacementItems": [
+        {
+          "productId": "445ByxbqOdwe5S6KWSEV",
+          "price": 810,
+          "qty": 1,
+          "name": "MOCHA BLANCH (Gallon) Finish Paint"
+        }
+      ],
+      "returnedCondition": "defective",
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "totalRefund": 220,
+      "createdAt": {
+        "seconds": 1779538818,
+        "nanoseconds": 394000000,
+        "_isTimestamp": true
+      },
+      "notes": "Replacement completed by July Lee",
+      "originalSaleDocId": "BnqBCOs8kNX7Bg51orRU",
+      "additionalPayment": 590,
+      "status": "Exchange Approved",
+      "exchangeCredit": 0,
+      "cashierName": "July Lee",
+      "returnedItems": [
+        {
+          "productId": "0cWcTqmpIiqUAACXNmqS",
+          "amount": 220,
+          "qty": 1,
+          "name": "MOCHA BLANCH (1L) Finish Paint"
+        }
+      ]
+    },
+    {
+      "id": "lFMEGiPXW1siXm0670UZ",
+      "notes": "Replacement completed by July Lee",
+      "originalSaleDocId": "2YDSXTwvxyMhBpeRmH6C",
+      "createdAt": {
+        "seconds": 1779533031,
+        "nanoseconds": 648000000,
+        "_isTimestamp": true
+      },
+      "totalRefund": 810,
+      "cashierId": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "returnedCondition": "defective",
+      "replacementItems": [
+        {
+          "productId": "4odl74T0aTRGwFUnSlV0",
+          "name": "CROWN SUNRISE (1L) Finish Paint",
+          "qty": 2,
+          "price": 225
+        }
+      ],
+      "reason": "Product defective",
+      "exchangeReference": "EX-260523-08699",
+      "originalSaleId": "ASM-260517-9171",
+      "exchangeId": "lFMEGiPXW1siXm0670UZ",
+      "replacementValue": 450,
+      "returnedItems": [
+        {
+          "productId": "2JfoZ32G1dx2u8pnItom",
+          "amount": 810,
+          "qty": 1,
+          "name": "CHOCO BROWN (Gallon) Finish Paint"
+        }
+      ],
+      "cashierName": "July Lee",
+      "exchangeCredit": 360,
+      "status": "Exchange Approved",
+      "additionalPayment": 0
+    }
+  ],
+  "users": [
+    {
+      "id": "QIF2q9zR7wrquPt0qbxx",
+      "isArchived": false,
+      "statusReason": "she's ready to work",
+      "uid": "sjxs8xsALlNIIRDueRV2c14mMB92",
+      "createdAt": {
+        "seconds": 1777206291,
+        "nanoseconds": 475000000,
+        "_isTimestamp": true
+      },
+      "email": "july@gmail.com",
+      "statusUpdatedAt": {
+        "seconds": 1778987870,
+        "nanoseconds": 250000000,
+        "_isTimestamp": true
+      },
+      "isActive": true,
+      "role": "cashier",
+      "name": "July Lee"
+    },
+    {
+      "id": "Z6M458sAu8fGV9VdpV5bpqiN5dn2",
+      "isOnline": false,
+      "isActive": false,
+      "role": "cashier",
+      "name": "Juan Dela Cruz",
+      "updatedAt": {
+        "seconds": 1777102680,
+        "nanoseconds": 640000000,
+        "_isTimestamp": true
+      },
+      "lastActive": {
+        "seconds": 1779442161,
+        "nanoseconds": 617000000,
+        "_isTimestamp": true
+      },
+      "statusReason": "vocation",
+      "email": "juan@asm.com",
+      "statusUpdatedAt": {
+        "seconds": 1779439215,
+        "nanoseconds": 331000000,
+        "_isTimestamp": true
+      }
+    },
+    {
+      "id": "h2sXSQWqRtXxoORNgsnClEq6vBx2",
+      "updatedAt": {
+        "seconds": 1777094545,
+        "nanoseconds": 99000000,
+        "_isTimestamp": true
+      },
+      "createdAt": {
+        "seconds": 1777094545,
+        "nanoseconds": 99000000,
+        "_isTimestamp": true
+      },
+      "name": "System Administrator",
+      "email": "admin@asm.com",
+      "isActive": true,
+      "isOnline": false,
+      "lastActive": {
+        "seconds": 1779890165,
+        "nanoseconds": 343000000,
+        "_isTimestamp": true
+      },
+      "role": "admin"
+    }
+  ],
+  "settings": [
+    {
+      "id": "system",
+      "currencyPrefix": "₱",
+      "updatedAt": {
+        "seconds": 1779521338,
+        "nanoseconds": 600000000,
+        "_isTimestamp": true
+      },
+      "pointsRedemptionValue": 0.2,
+      "taxRate": 0,
+      "defaultDiscount": 5,
+      "receiptFooter": "Thank you for shopping with us!",
+      "lowStockAlert": 5,
+      "adminName": "Sherryl M. Asinas",
+      "storeName": "ASM Hardware & General Merchandise",
+      "storeAddress": "National Road, Poblacion Abra de Ilog Occidenatal Mindoro",
+      "contactNumber": "09324681666"
+    }
+  ]
+}

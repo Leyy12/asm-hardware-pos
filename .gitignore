@@ -3,3 +3,7 @@ dist
 .env
 .env.local
 .DS_Store
+
+# ASM Backend secrets — NEVER commit
+server/.env
+server/node_modules

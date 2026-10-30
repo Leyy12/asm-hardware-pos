@@ -107,15 +107,39 @@
     letter-spacing: 0.02em;
 }
 
-.nav-login-btn {
+.nav-btn {
     padding: 10px 24px;
-    border-radius: var(--radius-full);
+    border-radius: 50px;
     display: flex;
     align-items: center;
     gap: 8px;
-    text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    font-family: inherit;
+}
+
+.nav-btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-secondary);
+}
+
+.nav-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.nav-btn-solid {
+    background: var(--accent);
+    color: white;
+}
+
+.nav-btn-solid:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
 }
 
 /* Hero Section */

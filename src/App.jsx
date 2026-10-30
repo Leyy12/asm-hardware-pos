@@ -21,6 +21,7 @@ import POS from './pages/cashier/POS'
 import CashierRefund from './pages/cashier/CashierRefund'
 import DiscountCards from './pages/admin/DiscountCards'
 import InventoryMonitoring from './pages/admin/InventoryMonitoring'
+import Catalog from './pages/admin/Catalog'
 
 function DashboardRedirect() {
   const { currentUser, userProfile } = useAuth()
@@ -34,7 +35,7 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Toaster
-          position="top-right"
+          position="top-center"
           toastOptions={{
             style: {
               background: 'var(--bg-elevated)',
@@ -72,6 +73,7 @@ export default function App() {
                   <Route path="settings" element={<Settings />} />
                   <Route path="discount-cards" element={<DiscountCards />} />
                   <Route path="presentation" element={<Presentation />} />
+                  <Route path="catalog" element={<Catalog />} />
                   <Route path="*" element={<Navigate to="dashboard" replace />} />
                 </Routes>
               </AdminLayout>

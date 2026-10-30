@@ -117,6 +117,13 @@ export default defineConfig({
         target: 'https://integrate.api.nvidia.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/nvidia-api/, '')
+      },
+      // ── Secure InventaAPI proxy ──────────────────────────────────────────
+      // All /api/* requests from the browser are forwarded to the ASM backend.
+      // The browser NEVER talks directly to InventaAPI (localhost:5002).
+      '/api': {
+        target: 'http://localhost:3002',
+        changeOrigin: true
       }
     }
   }

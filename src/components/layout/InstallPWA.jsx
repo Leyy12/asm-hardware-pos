@@ -1,17 +1,25 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Download, X } from 'lucide-react'
+import { Download } from 'lucide-react'
 
 export default function InstallPWA() {
     const [showInstall, setShowInstall] = useState(false)
-    const [isIOS, setIsIOS] = useState(false)
+    const [isIOS] = useState(() => {
+        return typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+    })
     const promptRef = useRef(null)
 
-    useEffect(() => {
-        // Detect iOS
-        const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-        setIsIOS(ios)
+    const handleInstallClick = async () => {
+        if (!promptRef.current) return
+        promptRef.current.prompt()
+        const { outcome } = await promptRef.current.userChoice
+        if (outcome === 'accepted') {
+            setShowInstall(false)
+        }
+        promptRef.current = null
+    }
 
+    useEffect(() => {
         const handler = (e) => {
             e.preventDefault()
             promptRef.current = e
@@ -23,7 +31,7 @@ export default function InstallPWA() {
         const triggerHandler = () => {
             if (promptRef.current) {
                 handleInstallClick()
-            } else if (ios) {
+            } else if (isIOS) {
                 alert('On iPhone/iPad: Tap the "Share" icon (square with arrow) at the bottom, then scroll down and tap "Add to Home Screen".')
             } else {
                 alert('To install: Open your browser menu (⋮) and tap "Install App" or "Add to Home Screen".')
@@ -38,7 +46,7 @@ export default function InstallPWA() {
         })
 
         // If it's iOS, we can show a special tip after a few seconds
-        if (ios && !window.navigator.standalone) {
+        if (isIOS && !window.navigator.standalone) {
             setTimeout(() => setShowInstall(true), 3000)
         }
 
@@ -48,15 +56,7 @@ export default function InstallPWA() {
         }
     }, [])
 
-    const handleInstallClick = async () => {
-        if (!promptRef.current) return
-        promptRef.current.prompt()
-        const { outcome } = await promptRef.current.userChoice
-        if (outcome === 'accepted') {
-            setShowInstall(false)
-        }
-        promptRef.current = null
-    }
+
 
     return (
         <AnimatePresence>
