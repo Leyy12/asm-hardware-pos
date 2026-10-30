@@ -339,10 +339,23 @@ export default function Inventory() {
     const loadedSegments = inventaSegments.filter(s => s.ok)
     const failedSegments = inventaSegments.filter(s => !s.ok)
     const activeSegment = loadedSegments.some(s => s.segment === segmentFilter) ? segmentFilter : 'all'
+    // InventaAPI sends the category as a name ("Hand Tools"), not one of this store's
+    // category IDs. Match it to a local category by name; otherwise keep the name.
+    const categoryByName = new Map(categories.map(c => [String(c.name || '').trim().toLowerCase(), c]))
+    const withLocalCategory = p => {
+        const name = String(p.categoryName || p.category || '').trim()
+        if (!name) return p
+        const local = categoryByName.get(name.toLowerCase())
+        return { ...p, categoryId: local ? local.id : `inventa:${name}`, categoryName: local ? local.name : name }
+    }
     const segmentInventa = (activeSegment === 'all'
         ? inventaProducts
         : inventaProducts.filter(p => p.inventaSegment === activeSegment)
-    ).flatMap(expandInventaVariants)
+    ).flatMap(expandInventaVariants).map(withLocalCategory)
+    // InventaAPI categories this store doesn't have yet, so the filter can still pick them
+    const inventaOnlyCategories = [...new Set(segmentInventa
+        .filter(p => String(p.categoryId).startsWith('inventa:'))
+        .map(p => p.categoryName))].sort()
 
     return (
         <div>
@@ -439,6 +452,7 @@ export default function Inventory() {
                 <select className="form-select" style={{ width: 180 }} value={filterCat} onChange={e => setFilterCat(e.target.value)}>
                     <option value="all">All Categories</option>
                     {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                    {inventaOnlyCategories.map(name => <option key={`inventa:${name}`} value={`inventa:${name}`}>{name} (InventaAPI)</option>)}
                 </select>
                 <select className="form-select" style={{ width: 160 }} value={viewMode} onChange={e => setViewMode(e.target.value)}>
                     <option value="all">All Products</option>
