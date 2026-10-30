@@ -4,12 +4,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' })
   }
 
-  const apiUrl = process.env.INVENTA_API_URL || 'https://inventa-api-theta.vercel.app'
-  const apiKey = process.env.INVENTA_API_KEY || 'daas_v2_8115ff6d9b3410886f67b6971855d706.d345ebc499f462cac3f24dc159542264a4a14afd2b3c3fe9bc7d0506d585da24'
+  // The key decides which products come back, so it must be the store's
+  // Hardware API key. It lives only in Vercel's environment, never in code.
+  const apiUrl = (process.env.INVENTA_API_URL || 'https://inventaapi.shop').replace(/\/+$/, '')
+  const apiKey = process.env.INVENTA_API_KEY
 
   if (!apiKey || !apiUrl) {
     return res.status(503).json({
-      error: 'InventaAPI not configured. Set INVENTA_API_URL and INVENTA_API_KEY in environment variables.'
+      error: 'InventaAPI not configured. Set INVENTA_API_KEY (the Hardware API key) in the Vercel environment variables.'
     })
   }
 
